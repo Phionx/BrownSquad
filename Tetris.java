@@ -23,7 +23,19 @@ public class Tetris {
 	static String f = "▄▄" + "\n" + "█";
 
 	static String [] shapes = {a,b,c,d,e,f};
-	public static void main(String[] args) {
+	
+	public static String makeboard (int n) {
+		String rs = top+"\n";
+		for (int i = 0; i < n; i++) {
+			rs+=middle+"\n";
+		}
+		rs = rs + top;
+		board = rs;
+		return rs;
+	}
+	 
+		public static void main(String[] args) {
+			makeboard(20);
 		for (String a: shapes) {
 			System.out.println(a);
 		}
@@ -32,5 +44,3 @@ public class Tetris {
 	}
 
 }
-
-
