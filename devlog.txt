@@ -2,3 +2,7 @@
     We finished our project proposal and to make it look pretty we used LaTeX to
     format it. We also included a detailed stage roadmap and now we are ready to
     begin and make a great APCS project!
+
+	
+1.11.2016  [Sachal]
+	I added the ascii version of all the shapes with different colors and the construction of the board
