@@ -14,16 +14,36 @@ public class Tetris {
 	static String top = " ---------------- ";
 	static String middle = "|                |";
 	static String board = top + "\n" + middle + "\n"  + middle + "\n" + middle + "\n"+ middle + "\n"+ middle + "\n"+ middle + "\n"+ top;
-
+/*	
+ * 
+ * 	
 	static String a = ANSI_RED + "▀█▀" + ANSI_RESET;
-	static String b = ANSI_BLUE + "■■■■"  + ANSI_RESET;
+	static String b = ANSI_BLUE + "▄▄▄▄"  + ANSI_RESET;
 	static String c = ANSI_GREEN + "██" + ANSI_RESET;
 	static String d = ANSI_RED + "▄█▄" + ANSI_RESET;
 	static String e = ANSI_RED + "▄ " + "\n" + ANSI_RED + "█▀" + ANSI_RESET;
 	static String f = "▄▄" + "\n" + "█";
-
-	static String [] shapes = {a,b,c,d,e,f};
+*/
+	//static String [] shapes = {a,b,c,d,e,f};
 	
+	
+	public static String makeshape (int [] [] s) {
+		
+		String rs = "";
+		for (int [] i: s) {
+			for (int j: i) {
+				if (j == 1)  {
+					rs+="O";
+				}
+				
+				else {
+					rs+=" ";
+				}
+			}
+			rs+="\n";
+		}
+		return rs;
+	}
 	public static String makeboard (int n) {
 		String rs = top+"\n";
 		for (int i = 0; i < n; i++) {
@@ -35,12 +55,17 @@ public class Tetris {
 	}
 	 
 		public static void main(String[] args) {
+			
+			int [] [] hi = {{0,1,0},{1,1,1}};
+			System.out.println(makeshape(hi));
+			/*
 			makeboard(20);
 		for (String a: shapes) {
 			System.out.println(a);
 		}
 		System.out.println(board);
-
+		*/
 	}
 
 }
+
