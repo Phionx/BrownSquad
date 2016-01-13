@@ -4,5 +4,14 @@
     begin and make a great APCS project!
 
 	
-1.11.2016  [Sachal]
+1.11.2016 | Sachal | Colors & Shapes
 	I added the ascii version of all the shapes with different colors and the construction of the board
+
+1.13.2016 | Shantanu | Hierarchy
+    Game 
+        Block
+            Easy
+            Med
+            Hard
+        NoBlock
+
