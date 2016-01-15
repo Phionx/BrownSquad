@@ -13,7 +13,16 @@ public class GridPiece {
 	public static final String ANSI_PURPLE = "\u001B[35m";
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_WHITE = "\u001B[37m";
-
+    public GridPiece(String type, String block){
+        this(type);
+        if(block.equals("O")) { color = ANSI_YELLOW;}
+        else if(block.equals("J")) { color = ANSI_BLUE;}
+        else if(block.equals("L")) { color = ANSI_WHITE;}
+        else if(block.equals("I")) { color = ANSI_CYAN;}
+        else if(block.equals("T")) { color = ANSI_PURPLE;}
+        else if(block.equals("Z")) { color = ANSI_RED;}
+        else if(block.equals("S")) { color = ANSI_GREEN;}
+    }
     public GridPiece(String type){
         cellType = type;
         color = ANSI_WHITE; 

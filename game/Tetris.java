@@ -24,8 +24,83 @@ public class Tetris{
         GridX = SizeX; GridY = SizeY;
         Game = new GridPiece [GridY][GridX];
         init();
+        initPieces();
     }
 
+    public void initPieces(){
+        O_Piece[0][0] = new GridPiece("Game", "O");
+        O_Piece[0][1] = new GridPiece("Game", "O");
+        O_Piece[1][0] = new GridPiece("Game", "O");
+        O_Piece[1][1] = new GridPiece("Game", "O");
+
+        J_Piece[0][0] = new GridPiece("Game", "J");
+        J_Piece[0][1] = new GridPiece("Game", "J");
+        J_Piece[0][2] = new GridPiece("Game", "J");
+        J_Piece[1][0] = new GridPiece("Game", "J");
+        J_Piece[1][1] = new GridPiece("Game", "J");
+        J_Piece[1][2] = new GridPiece("Game", "J");
+        J_Piece[2][0] = new GridPiece("Game", "J");
+        J_Piece[2][1] = new GridPiece("Game", "J");
+        J_Piece[2][2] = new GridPiece("Game", "J");
+
+        I_Piece[0][0] = new GridPiece("Game", "I");
+        I_Piece[0][1] = new GridPiece("Game", "I");
+        I_Piece[0][2] = new GridPiece("Game", "I");
+        I_Piece[0][3] = new GridPiece("Game", "I");
+        I_Piece[1][0] = new GridPiece("Game", "I");
+        I_Piece[1][1] = new GridPiece("Game", "I");
+        I_Piece[1][2] = new GridPiece("Game", "I");
+        I_Piece[1][3] = new GridPiece("Game", "I");
+        I_Piece[2][0] = new GridPiece("Game", "I");
+        I_Piece[2][1] = new GridPiece("Game", "I");
+        I_Piece[2][2] = new GridPiece("Game", "I");
+        I_Piece[2][3] = new GridPiece("Game", "I");
+        I_Piece[3][0] = new GridPiece("Game", "I");
+        I_Piece[3][1] = new GridPiece("Game", "I");
+        I_Piece[3][2] = new GridPiece("Game", "I");
+        I_Piece[3][3] = new GridPiece("Game", "I");
+
+        L_Piece[0][0] = new GridPiece("Game", "L");
+        L_Piece[0][1] = new GridPiece("Game", "L");
+        L_Piece[0][2] = new GridPiece("Game", "L");
+        L_Piece[1][0] = new GridPiece("Game", "L");
+        L_Piece[1][1] = new GridPiece("Game", "L");
+        L_Piece[1][2] = new GridPiece("Game", "L");
+        L_Piece[2][0] = new GridPiece("Game", "L");
+        L_Piece[2][1] = new GridPiece("Game", "L");
+        L_Piece[2][2] = new GridPiece("Game", "L");
+
+        S_Piece[0][0] = new GridPiece("Game", "S");
+        S_Piece[0][1] = new GridPiece("Game", "S");
+        S_Piece[0][2] = new GridPiece("Game", "S");
+        S_Piece[1][0] = new GridPiece("Game", "S");
+        S_Piece[1][1] = new GridPiece("Game", "S");
+        S_Piece[1][2] = new GridPiece("Game", "S");
+        S_Piece[2][0] = new GridPiece("Game", "S");
+        S_Piece[2][1] = new GridPiece("Game", "S");
+        S_Piece[2][2] = new GridPiece("Game", "S");
+
+        T_Piece[0][0] = new GridPiece("Game", "T");
+        T_Piece[0][1] = new GridPiece("Game", "T");
+        T_Piece[0][2] = new GridPiece("Game", "T");
+        T_Piece[1][0] = new GridPiece("Game", "T");
+        T_Piece[1][1] = new GridPiece("Game", "T");
+        T_Piece[1][2] = new GridPiece("Game", "T");
+        T_Piece[2][0] = new GridPiece("Game", "T");
+        T_Piece[2][1] = new GridPiece("Game", "T");
+        T_Piece[2][2] = new GridPiece("Game", "T");
+
+        Z_Piece[0][0] = new GridPiece("Game", "Z");
+        Z_Piece[0][1] = new GridPiece("Game", "Z");
+        Z_Piece[0][2] = new GridPiece("Game", "Z");
+        Z_Piece[1][0] = new GridPiece("Game", "Z");
+        Z_Piece[1][1] = new GridPiece("Game", "Z");
+        Z_Piece[1][2] = new GridPiece("Game", "Z");
+        Z_Piece[2][0] = new GridPiece("Game", "Z");
+        Z_Piece[2][1] = new GridPiece("Game", "Z");
+        Z_Piece[2][2] = new GridPiece("Game", "Z");
+
+    }
     public void init(){
         for(int a = 0; a < Game.length; a++){
             for(int b = 0; b < Game[a].length; b++) {
