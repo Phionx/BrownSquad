@@ -1,1 +1,13 @@
-#Fill this out
+* Create Game Piece Rotation
+* Enter rules for falling block
+* Enter rules for stoping block
+* Enter rules for line clearing
+* Integrate input and game
+* Fully finish no obstacle block version of game
+* Implement obstacle blocks
+* Add all necessary rules to obstacle block games 
+    * create easy, medium, and hard clearing methods
+* User Interface -- nice menu etc.
+* Bugs ... so many bugs
+* Maps?
+
