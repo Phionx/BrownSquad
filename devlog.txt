@@ -8,10 +8,23 @@
 	I added the ascii version of all the shapes with different colors and the construction of the board
 
 1.13.2016 | Shantanu | Hierarchy
-    Game 
-        Block
-            Easy
-            Med
-            Hard
-        NoBlock
+    Tetris 
+        BlockGame
+            EasyGame
+            MedGame
+            HardGame
+        NoBlockGame
+
+1.14.2016 | Shantanu | GridPiece & Tetris Game
+    * Created the basic outline for our Tetris Grid
+    * Each box on the grid is represented by a GridPiece, which is an object
+      that has properties of a color, design, state, and type
+        * The color, and design determine what is printed in the grid when we
+          print our Tetris game
+        * The state determines whether the design is actually printed (in the
+          appropriate color) or a blank space is put in its place
+    * Right now we are making the basic Tetris game and we can implement it in
+      the more specilized versions of the game we are developing
+    * We are representing the game grid as a 2D array of GridPieces and each
+      Tetris game piece is also represented by a 2D array of GridPieces 
 
