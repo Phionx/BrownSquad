@@ -16,7 +16,9 @@ import jcurses.system.Toolkit;
 public class Test {    
         public static void main(String[] args) throws Exception {
             
-        System.out.println(Toolkit.readCharacter());
+        InputChar c = Toolkit.readCharacter();
+                    System.out.println(c.getCharacter());
+                                Thread.sleep(3000);
 
 }
 }
