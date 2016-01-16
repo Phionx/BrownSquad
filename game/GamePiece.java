@@ -3,6 +3,7 @@ public class GamePiece{
     public int YPos;
     public int type;
     public int Turn;
+    public String Block;
     public boolean [][] Pos;
 
     //Block Positions
@@ -51,7 +52,7 @@ public class GamePiece{
     public static final boolean [][] I_4 = {{true,true,true,true},{false,false,false,false}, {false,false,false,false}, {false,false,false,false}};
 
     public GamePiece(int X, int Y, String BlockType, int TurnPos){ //X, Y are the top left corner of the array, 
-                                                                   //BlockType is the type of teh piece, TUrn Pos 
+       Block = BlockType;                                                       //BlockType is the type of teh piece, TUrn Pos 
        if(BlockType.equals("T")){
            Pos = new boolean[3][3];
            type = 1;

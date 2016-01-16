@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Tetris{
+    public static final int time = 200;
     public int GridX, GridY;
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -23,8 +24,10 @@ public class Tetris{
     public ArrayList<GamePiece> GameObjects = new ArrayList<GamePiece>();  
     public GridPiece [][] Game;
     
-    public Tetris(int SizeX, int SizeY){
+    public Tetris(int SizeX, int SizeY){ 
         GridX = SizeX; GridY = SizeY;
+        if(SizeX < 10) GridX = 10;
+        if (SizeY < 10) GridY = 10;
         Game = new GridPiece [GridY][GridX];
         init();
         initPieces();
@@ -128,7 +131,7 @@ public class Tetris{
         for(GridPiece[] i: Game){
             for(GridPiece j: i) {
                 if(j.state){
-                    ans += j.design + j.color;
+                    ans += j.color + j.design;
                 }else {
                     ans += " ";
                 }
@@ -138,13 +141,27 @@ public class Tetris{
         return ans;
     }
 
-    public static void Superimpose(){
-        
-
-
-
+    public void newPiece(String BlockType){
+        GamePiece temp = new GamePiece(GridX/2, 1, BlockType, 1);
+        GameObjects.add(temp);
     }
 
+    public void addToGame(GamePiece temp){
+        int XSize, YSize, XStart, YStart;
+        XSize = temp.Pos[0].length;
+        YSize = temp.Pos.length;
+        XStart = temp.XPos;
+        YStart = temp.YPos;
+
+        for(int i = YStart; i < YStart + YSize; i++){
+            for(int j = XStart; j < XStart + XSize; j++){
+                if(temp.Pos[i-YStart][j-XStart]){
+                    Game[i][j] = new GridPiece("Game", temp.Block);
+                    Game[i][j].state = true;
+                }
+            }
+        }
+    }
     private static void clear(){
         final String clear = "\u001b[2J";
         final String home = "\u001b[H";
@@ -154,7 +171,7 @@ public class Tetris{
     
     private static void delay(){
         try {
-            Thread.sleep(200);
+            Thread.sleep(time);
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -162,6 +179,11 @@ public class Tetris{
 
     public static void main (String [] args){
         Tetris test = new Tetris(50, 50);
+        clear();
+        System.out.println(test.printGame());
+        test.newPiece("T");
+        test.addToGame(test.GameObjects.get(0));
+        delay();
         clear();
         System.out.println(test.printGame());
     }
