@@ -172,10 +172,10 @@ public class Tetris{
         }
     }
 
-    public void update(){
+    public void update(String type){
         reset();
         if(GameObjects.isEmpty()){
-            newPiece("T");
+            newPiece(type);
         }
         fallGamePiece(GameObjects.get(0));
     }
@@ -271,10 +271,16 @@ public class Tetris{
     public static void main (String [] args){
         Tetris test = new Tetris(50, 50);
         clear();
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 20; i++){
             delay();
             clear();
-            test.update();
+            test.update("O");
+            System.out.println(test.printGame());
+        }
+        for(int i = 0; i < 80; i++){
+            delay();
+            clear();
+            test.update("T");
             System.out.println(test.printGame());
         }
 

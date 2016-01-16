@@ -83,7 +83,7 @@ public class GamePiece{
        YPos = Y;
        Turn = TurnPos;
        init_Pieces();
-       Pos = ALL[type][Turn];
+       Pos = ALL[type-1][Turn];
        Size = Pos.length;
     }
 
