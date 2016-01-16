@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Tetris{
     public int GridX, GridY;
 	public static final String ANSI_RESET = "\u001B[0m";
@@ -18,6 +20,7 @@ public class Tetris{
     public static final GridPiece [][] T_Piece = new GridPiece [3][3];
     public static final GridPiece [][] Z_Piece = new GridPiece [3][3];
 
+    public ArrayList<GamePiece> GameObjects = new ArrayList<GamePiece>();  
     public GridPiece [][] Game;
     
     public Tetris(int SizeX, int SizeY){
@@ -134,6 +137,14 @@ public class Tetris{
         }
         return ans;
     }
+
+    public static void Superimpose(){
+        
+
+
+
+    }
+
     private static void clear(){
         final String clear = "\u001b[2J";
         final String home = "\u001b[H";
