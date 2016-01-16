@@ -33,4 +33,7 @@
       many game blocks are on the field
     * Added all possible states of a piece to GamePiece
         * Lots of true, false
-
+1.16.2015 | Shantanu | Falling & GamePieces & GameBlocks
+    * Figured out a way to store falling blocks versus stationary blocks 
+    * Figured out a way to make the falling blocks fall
+    * Added boundaries so that the falling blocks know when to stop falling
