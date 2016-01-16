@@ -21,16 +21,20 @@ public class Tetris{
     public static final GridPiece [][] T_Piece = new GridPiece [3][3];
     public static final GridPiece [][] Z_Piece = new GridPiece [3][3];
 
-    public ArrayList<GamePiece> GameObjects = new ArrayList<GamePiece>();  
+    public ArrayList<GamePiece> GameObjects = new ArrayList<GamePiece>();
+    public ArrayList<GameBlock> GameBlocks = new ArrayList<GameBlock>();
     public GridPiece [][] Game;
+    public GridPiece [][] GameReset;
     
     public Tetris(int SizeX, int SizeY){ 
         GridX = SizeX; GridY = SizeY;
         if(SizeX < 10) GridX = 10;
         if (SizeY < 10) GridY = 10;
         Game = new GridPiece [GridY][GridX];
+        GameReset = new GridPiece[GridY][GridX];
         init();
         initPieces();
+        GameReset = Game;
     }
 
     public void initPieces(){
@@ -126,6 +130,51 @@ public class Tetris{
         }
     }
     
+    public void fallGamePiece(GamePiece temp){
+        GridPiece [][] tempState = Game;
+        reset();
+        int lowBlock = 0;
+        for(int i = 0; i < temp.Size; i++){
+            for(int j = 0; j < temp.Size; j++){
+                if(temp.Pos[j][i]) lowBlock = j;
+            }
+            if(Game[temp.YPos + lowBlock + 1][i + temp.XPos].state){
+                GamePieceToGameBlock(temp);
+                Game = tempState;
+                return;
+            }
+        }
+        temp.YPos++;
+        addGameBlocks();
+        addGamePieces();
+    }
+
+//work on :P
+    public void fallGamePieces(){
+        for(Iterator<GamePiece> i = GameObjects.iterator(); i.hasNext();){
+            fallGamePiece(i.next());
+        }
+    }
+
+    public void GamePieceToGameBlock(GamePiece temp){
+        GameObjects.remove(temp);
+        for(int i = 0; i < temp.Size; i++){
+            for(int j = 0; j < temp.Size; j++){
+                if(temp.Pos[i][j]){
+                    GameBlocks.add(new GameBlock(temp.Block, temp.XPos + j, temp.YPos + i));
+                }
+            }
+        }
+    }
+
+    public void update(){
+        reset();
+        if(GameObjects.isEmpty()){
+            newPiece("T");
+        }
+        fallGamePiece(GameObjects.get(0));
+    }
+        
     public String printGame(){
         String ans = "";
         for(GridPiece[] i: Game){
@@ -141,18 +190,41 @@ public class Tetris{
         return ans;
     }
 
+    //Remove later
+    
+    public String printGameReset(){
+        String ans = "";
+        for(GridPiece[] i: GameReset){
+            for(GridPiece j: i) {
+                if(j.state){
+                    ans += j.color + j.design;
+                }else {
+                    ans += " ";
+                }
+            }
+            ans += "\n";
+        }
+        return ans;
+    }
+
+
     public void newPiece(String BlockType){
         GamePiece temp = new GamePiece(GridX/2, 1, BlockType, 1);
         GameObjects.add(temp);
     }
 
-    public void addToGame(GamePiece temp){
+    public void addGamePieces(){
+        for(Iterator<GamePiece> i = GameObjects.iterator(); i.hasNext();){
+            addGamePieceToGame(i.next());
+        }
+    }
+
+    public void addGamePieceToGame(GamePiece temp){
         int XSize, YSize, XStart, YStart;
         XSize = temp.Pos[0].length;
         YSize = temp.Pos.length;
         XStart = temp.XPos;
         YStart = temp.YPos;
-
         for(int i = YStart; i < YStart + YSize; i++){
             for(int j = XStart; j < XStart + XSize; j++){
                 if(temp.Pos[i-YStart][j-XStart]){
@@ -162,6 +234,19 @@ public class Tetris{
             }
         }
     }
+
+    public void addGameBlocks(){
+        for(Iterator<GameBlock> i = GameBlocks.iterator(); i.hasNext();){
+            GameBlock temp = i.next();
+            Game[temp.X][temp.Y] = new GridPiece("Game", temp.name);
+        }
+    }
+
+    public void reset(){
+        for(int i = 0; i < Game.length; i++) for(int j = 0; j < Game.length; j++) Game[i][j] = GameReset[i][j];
+    }
+
+
     private static void clear(){
         final String clear = "\u001b[2J";
         final String home = "\u001b[H";
@@ -180,12 +265,27 @@ public class Tetris{
     public static void main (String [] args){
         Tetris test = new Tetris(50, 50);
         clear();
+        System.out.println(test.printGameReset());
         System.out.println(test.printGame());
-        test.newPiece("T");
-        test.addToGame(test.GameObjects.get(0));
         delay();
         clear();
+        test.update();
+        System.out.println(test.printGameReset());
         System.out.println(test.printGame());
+        delay();
+        clear();
+        test.update();
+        System.out.println(test.printGameReset());
+        System.out.println(test.printGame());
+        delay();
+        clear();
+        test.update();
+        System.out.println(test.printGameReset());
+        System.out.println(test.printGame());
+        test.reset();
+        System.out.println(test.printGameReset());
+
+
     }
 
 

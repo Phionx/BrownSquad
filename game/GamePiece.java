@@ -4,6 +4,7 @@ public class GamePiece{
     public int type;
     public int Turn;
     public String Block;
+    public int Size;
     public boolean [][] Pos;
 
     //Block Positions
@@ -83,6 +84,7 @@ public class GamePiece{
        Turn = TurnPos;
        init_Pieces();
        Pos = ALL[type][Turn];
+       Size = Pos.length;
     }
 
     public void init_Pieces(){

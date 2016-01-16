@@ -3,6 +3,7 @@ public class GridPiece {
     public String cellType; //type of cell
     public String design;
     public boolean state;
+    public String name;
     
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -15,6 +16,7 @@ public class GridPiece {
 	public static final String ANSI_WHITE = "\u001B[37m";
     public GridPiece(String type, String block){
         this(type);
+        name = block;
         if(block.equals("O")) { color = ANSI_YELLOW;}
         else if(block.equals("J")) { color = ANSI_BLUE;}
         else if(block.equals("L")) { color = ANSI_WHITE;}
