@@ -28,3 +28,9 @@
     * We are representing the game grid as a 2D array of GridPieces and each
       Tetris game piece is also represented by a 2D array of GridPieces 
 
+1.15.2016 | Shantanu | GamePiece & States
+    * Added a class of GamePiece which will be an object that helps show how
+      many game blocks are on the field
+    * Added all possible states of a piece to GamePiece
+        * Lots of true, false
+
