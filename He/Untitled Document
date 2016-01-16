@@ -1,0 +1,34 @@
+How to run:
+
+Make surer you have the full jcurses folder somewhere:
+
+compile with 
+
+javac -cp "PATH:./" Test.java
+
+where PATH is the path to the jar file in your jcurses folder
+
+i.g
+
+javac -cp "/home/sachal/jcurses/lib/jcurses.jar:./" Test.java
+
+
+
+run with
+
+java -cp "PATH:./" Test.java
+
+
+
+How to use:
+
+Once you run the program: press the key 'a' and you will see that it closes.
+
+Important notes:
+
+this implementation is relatively gui -ish and breaks when you try to just regular SOP.  We need to somehow make it so its detecting in
+a regular terminal window rather than that other jcurses proccess
+
+
+you can try experimenting but im looking in to how multithreading can fix this
+
