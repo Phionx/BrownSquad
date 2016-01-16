@@ -34,7 +34,11 @@ public class Tetris{
         GameReset = new GridPiece[GridY][GridX];
         init();
         initPieces();
-        GameReset = Game;
+        for(int i = 0; i < Game.length; i++){
+            for(int j = 0; j < Game[i].length; j++){
+                GameReset[i][j] = Game[i][j];
+            }
+        }
     }
 
     public void initPieces(){
@@ -134,18 +138,19 @@ public class Tetris{
         GridPiece [][] tempState = Game;
         reset();
         int lowBlock = 0;
+        addGameBlocks();
         for(int i = 0; i < temp.Size; i++){
             for(int j = 0; j < temp.Size; j++){
                 if(temp.Pos[j][i]) lowBlock = j;
             }
             if(Game[temp.YPos + lowBlock + 1][i + temp.XPos].state){
                 GamePieceToGameBlock(temp);
+                addGameBlocks();
                 Game = tempState;
                 return;
             }
         }
         temp.YPos++;
-        addGameBlocks();
         addGamePieces();
     }
 
@@ -161,7 +166,7 @@ public class Tetris{
         for(int i = 0; i < temp.Size; i++){
             for(int j = 0; j < temp.Size; j++){
                 if(temp.Pos[i][j]){
-                    GameBlocks.add(new GameBlock(temp.Block, temp.XPos + j, temp.YPos + i));
+                    GameBlocks.add(new GameBlock(temp.Block, temp.YPos + i, temp.XPos + j));
                 }
             }
         }
@@ -239,6 +244,7 @@ public class Tetris{
         for(Iterator<GameBlock> i = GameBlocks.iterator(); i.hasNext();){
             GameBlock temp = i.next();
             Game[temp.X][temp.Y] = new GridPiece("Game", temp.name);
+            Game[temp.X][temp.Y].state = true;
         }
     }
 
@@ -265,26 +271,12 @@ public class Tetris{
     public static void main (String [] args){
         Tetris test = new Tetris(50, 50);
         clear();
-        System.out.println(test.printGameReset());
-        System.out.println(test.printGame());
-        delay();
-        clear();
-        test.update();
-        System.out.println(test.printGameReset());
-        System.out.println(test.printGame());
-        delay();
-        clear();
-        test.update();
-        System.out.println(test.printGameReset());
-        System.out.println(test.printGame());
-        delay();
-        clear();
-        test.update();
-        System.out.println(test.printGameReset());
-        System.out.println(test.printGame());
-        test.reset();
-        System.out.println(test.printGameReset());
-
+        for(int i = 0; i < 100; i++){
+            delay();
+            clear();
+            test.update();
+            System.out.println(test.printGame());
+        }
 
     }
 
