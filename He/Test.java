@@ -1,5 +1,10 @@
 import jcurses.system.InputChar;
-import jcurses.system.Toolkit;
+import jcurses.system.Toolkit;	
+import jcurses.util.Rectangle;
+import jcurses.system.CharColor;
+
+
+
 
 /**
  * Simple example in JCurses
@@ -10,24 +15,21 @@ import jcurses.system.Toolkit;
  */
 public class Test {    
         public static void main(String[] args) throws Exception {
-            Toolkit.init();
-            char test = 'h';
+ 
             InputChar c = Toolkit.readCharacter();
+           
+           Toolkit.shutdown();
+           InputChar tes = Toolkit.readCharacter();
+			if (tes.getCharacter() == 'a') {
+   			System.out.println(c.getCharacter());
+			}
+     	   // char test = c.getCharacter();
+           
+              
             
-            
-            
-            if (c.getCharacter() == 'a') {
-                
-                test = 'a';
-                Toolkit.shutdown();
-                
-            }
+            //`System.out.println("testing, if all is well it will be a.... and it is :" + test);
 
-            else {
-                    System.out.println(c.getCharacter());
-            }
-            
-            System.out.println("testing, if all is well it will be a.... and it is :" + test);
+	//Toolkit.shutdown();
 
                 
         }
