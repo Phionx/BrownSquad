@@ -125,9 +125,16 @@ public class GamePiece{
        I[3] = I_4;
     }
 
-    public void turnPiece(){
+    public void turnPieceUp(){
         Turn = (Turn + 1)%4;
         Pos = ALL[type-1][Turn];
     }
+
+    public void turnPieceDown(){
+        Turn = Turn - 1;
+        if(Turn < 0) Turn += 4;
+        Pos = ALL[type-1][Turn];
+    }
+
     
 }
