@@ -208,7 +208,7 @@ public class Tetris{
     }
 //AddToGame------------------------------------------------------------------------------------------------------------------------
     public void newPiece(String BlockType){
-        GamePiece temp = new GamePiece(GridX/2, 1, BlockType, 1);
+        GamePiece temp = new GamePiece(GridX/2, 1, BlockType, 0);
         GameObjects.add(temp);
     }
 
@@ -243,8 +243,17 @@ public class Tetris{
     }
 
 //Checkers------------------------------------------------------------------------------------------------------------------------
+    /*
     public void checkClearLine(){
-    }
+        boolean temp = true;
+        for(int i = 1; i < GridY-1; i++){
+            temp = true;
+            for(int j = 1; j < GridX-1; j++){
+                if(!(Game[i][j].state)) temp = false;
+            }
+            if(temp) 
+        }
+    }*/
 //Printing------------------------------------------------------------------------------------------------------------------------        
     public String printGame(){
         String ans = "";

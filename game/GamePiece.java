@@ -125,5 +125,9 @@ public class GamePiece{
        I[3] = I_4;
     }
 
+    public void turnPiece(){
+        Turn = (Turn + 1)%4;
+        Pos = ALL[type-1][Turn];
+    }
     
 }
