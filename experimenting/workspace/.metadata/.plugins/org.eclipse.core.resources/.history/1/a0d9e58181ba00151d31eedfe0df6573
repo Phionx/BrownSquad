@@ -1,0 +1,33 @@
+
+
+/*
+import jcurses.system.CharColor;
+import jcurses.widgets.DefaultLayoutManager;
+import jcurses.widgets.Label;
+import jcurses.widgets.WidgetsConstants;
+import jcurses.widgets.Window;
+*/
+/**
+ * Simple example in JCurses
+ *
+ * @package hells.cenobites.code.java.jcurses.examples.one
+ * @author Nycholas de Oliveira e Oliveira <nycholas@gmail.com>
+ * @version 1.0
+ */
+public class Testing {    
+        public static void main(String[] args) throws Exception {
+        	/*
+                Window w = new Window(100, 100, true, "All gone to hell!");
+                Label label = new Label("All gone to hell!", new CharColor(
+                                CharColor.BLACK, CharColor.GREEN));
+                DefaultLayoutManager mgr = new DefaultLayoutManager();
+                mgr.bindToContainer(w.getRootPanel());
+                mgr.addWidget(label, 0, 0, 100, 100, WidgetsConstants.ALIGNMENT_CENTER,
+                                WidgetsConstants.ALIGNMENT_CENTER);
+                w.show();
+                Thread.currentThread();
+                Thread.sleep(3000);
+                w.close();
+                */
+        }
+}
