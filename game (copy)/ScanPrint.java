@@ -16,4 +16,4 @@ ScanPrint() {
 	public String getMes () {
 		return message;
 	}
-
+}

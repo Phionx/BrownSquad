@@ -1,10 +1,7 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Tetris{
 //Instance Variables
-	public String mes = "";
     public static final int time = 200;
     public int GridX, GridY;
 	public static final String ANSI_RESET = "\u001B[0m";
@@ -188,33 +185,11 @@ public class Tetris{
         
     }
     
-    public void turnGamePiece(GamePiece shape,String change_direction){
-    	
-    	if (change_direction.equals("w")) {
-    		if (shape.Turn == 0) shape.Turn = 1;
-    		else if (shape.Turn == 1) shape.Turn = 2;
-    		else if (shape.Turn == 2) shape.Turn = 3;
-    		else if (shape.Turn == 3) shape.Turn = 2;
-  
-    		}
-    	if (change_direction.equals("s")) {
-    		if (shape.Turn == 0) shape.Turn = 3;
-    		else if (shape.Turn == 1) shape.Turn = 0;
-    		else if (shape.Turn == 2) shape.Turn = 1;
-    		else if (shape.Turn == 3) shape.Turn = 0;
-  
-    		}
-    	
-    	shape.Pos = shape.ALL[shape.type -1][shape.Turn];
+    public void turnGamePiece(){
+        
     }
     
-    public void moveGamePiece(GamePiece shape,String change_direction){ 
-    	if (change_direction.equals("a")) {
-    		shape.XPos--;
-    	}
-    	if(change_direction.equals("d")) {
-    		shape.XPos++;
-    	}
+    public void moveGamePiece(){
         
     }
     
@@ -233,7 +208,7 @@ public class Tetris{
     }
 //AddToGame------------------------------------------------------------------------------------------------------------------------
     public void newPiece(String BlockType){
-        GamePiece temp = new GamePiece(GridX/2, 1, BlockType, 1);
+        GamePiece temp = new GamePiece(GridX/2, 1, BlockType, 0);
         GameObjects.add(temp);
     }
 
@@ -268,8 +243,17 @@ public class Tetris{
     }
 
 //Checkers------------------------------------------------------------------------------------------------------------------------
+    /*
     public void checkClearLine(){
-    }
+        boolean temp = true;
+        for(int i = 1; i < GridY-1; i++){
+            temp = true;
+            for(int j = 1; j < GridX-1; j++){
+                if(!(Game[i][j].state)) temp = false;
+            }
+            if(temp) 
+        }
+    }*/
 //Printing------------------------------------------------------------------------------------------------------------------------        
     public String printGame(){
         String ans = "";
@@ -308,35 +292,31 @@ public class Tetris{
 
 //Main----------------------------------------------------------------------------------------------------------------------------
     public static void main (String [] args){
-    	Runnable r = new ScanPrint();
-    	Thread thread2 = new Thread(r);
+        Thread thread2 = new Thread();
         Tetris test = new Tetris(50, 50);
         clear();
         for(int i = 0; i < 20; i++){
             delay();
             clear();
             test.update("O");
-            System.out.println(test.printGame());     
-            thread2.start();
+            System.out.println(test.printGame());
+
+           thread2.start();
             try {
             thread2.sleep(time);
             }
             catch(InterruptedException ex) {
                 thread2.interrupt();
-            }
-            
-            ScanPrint s = (ScanPrint)r;
-            test.turnGamePiece(test.GameObjects.get(0),s.message);
-        }
+            }     
+}
         for(int i = 0; i < 80; i++){
             delay();
             clear();
             test.update("T");
-            System.out.println	(test.printGame());
+            System.out.println(test.printGame());
         }
 
     }
 
 
 }
-
