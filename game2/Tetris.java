@@ -241,7 +241,36 @@ public class Tetris{
             Game[temp.X][temp.Y].state = true;
         }
     }
-
+    public void turnGamePiece(GamePiece shape,String change_direction){
+    	
+    	if (change_direction.equals("w")) {
+    		if (shape.Turn == 0) shape.Turn = 1;
+    		else if (shape.Turn == 1) shape.Turn = 2;
+    		else if (shape.Turn == 2) shape.Turn = 3;
+    		else if (shape.Turn == 3) shape.Turn = 2;
+  
+    		}
+    	if (change_direction.equals("s")) {
+    		if (shape.Turn == 0) shape.Turn = 3;
+    		else if (shape.Turn == 1) shape.Turn = 0;
+    		else if (shape.Turn == 2) shape.Turn = 1;
+    		else if (shape.Turn == 3) shape.Turn = 0;
+  
+    		}
+    	
+    	shape.Pos = shape.ALL[shape.type -1][shape.Turn];
+    }
+    	
+    public void moveGamePiece(GamePiece shape,String change_direction){ 
+    	if (change_direction.equals("a")) {
+    		shape.XPos--;
+    	}
+    	if(change_direction.equals("d")) {
+    		shape.XPos++;
+    	}
+        
+    }
+    
 //Checkers------------------------------------------------------------------------------------------------------------------------
     /*
     public void checkClearLine(){
@@ -293,6 +322,10 @@ public class Tetris{
 //Main----------------------------------------------------------------------------------------------------------------------------
     public static void main (String [] args){
         Thread thread2 = new Thread();
+	Runnable r = new ScanPrint();
+        thread2.setDaemon(true);
+        thread2.setPriority(Thread.MIN_PRIORITY);
+        thread2.start();
         Tetris test = new Tetris(50, 50);
         clear();
         for(int i = 0; i < 20; i++){
@@ -301,9 +334,9 @@ public class Tetris{
             test.update("O");
             System.out.println(test.printGame());
 
-           thread2.start();
+           //thread2.start();
             try {
-            thread2.sleep(time);
+            Thread.sleep(time);
             }
             catch(InterruptedException ex) {
                 thread2.interrupt();
@@ -314,6 +347,12 @@ public class Tetris{
             clear();
             test.update("T");
             System.out.println(test.printGame());
+try {
+            Thread.sleep(time);
+            }
+            catch(InterruptedException ex) {
+                thread2.interrupt();
+            }
         }
 
     }
