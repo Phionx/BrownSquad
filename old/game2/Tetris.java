@@ -259,6 +259,14 @@ public class Tetris{
     		else if (shape.Turn == 3) shape.Turn = 0;
   
     		}
+
+	if (change_direction.equals("a")) {
+    		shape.XPos--;
+    	}
+    	if(change_direction.equals("d")) {
+    		shape.XPos++;
+    	}
+
     	
     	shape.Pos = shape.ALL[shape.type -1][shape.Turn];
     }

@@ -259,6 +259,7 @@ public class Tetris{
     		else if (shape.Turn == 3) shape.Turn = 0;
   
     		}
+	moveGamePiece(GamePiece shape,String change_direction);
     	
     	shape.Pos = shape.ALL[shape.type -1][shape.Turn];
     }
@@ -350,7 +351,6 @@ public class Tetris{
                 thread2.interrupt();
             }
             
-            ScanPrint s = (ScanPrint)r;
            
             test.turnGamePiece(test.GameObjects.get(0),mes);
 	    mes = "";
