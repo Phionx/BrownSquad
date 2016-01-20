@@ -7,8 +7,8 @@ ScanPrint() {
 }
 	public void run() {
 		Scanner s = new Scanner(System.in);
-         if (s.hasNext()) {
-         	message= s.next();
+         while (s.hasNext()) {
+         	Tetris.mes= s.next();
          }
 
 	}

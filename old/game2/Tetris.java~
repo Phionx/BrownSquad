@@ -4,6 +4,7 @@ public class Tetris{
 //Instance Variables
     public static final int time = 200;
     public int GridX, GridY;
+	public static String mes = "";
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
@@ -334,7 +335,7 @@ public class Tetris{
         thread2.setDaemon(true);
         thread2.setPriority(Thread.MAX_PRIORITY);
         thread2.start();
-       /*
+       
         Tetris test = new Tetris(20, 20);
         clear();
         for(int i = 0; i < 20; i++){
@@ -351,13 +352,11 @@ public class Tetris{
             
             ScanPrint s = (ScanPrint)r;
            
-            /*
-            Scanner s = new Scanner (System.in);
-            String message = s.next();
-            test.turnGamePiece(test.GameObjects.get(0),message);
+            test.turnGamePiece(test.GameObjects.get(0),mes);
+	    mes = "";
             
         }
-        */
+        
         
         for (int i = 0 ;i < 80; i++) {
         	
@@ -368,8 +367,9 @@ public class Tetris{
                     thread2.interrupt();
                 }
                 
-                ScanPrint s = (ScanPrint)r;
-                System.out.println(s.message);
+               
+                System.out.println(mes);
+		mes = "";
                 
        }
 
