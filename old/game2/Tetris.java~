@@ -208,7 +208,8 @@ public class Tetris{
     }
 //AddToGame------------------------------------------------------------------------------------------------------------------------
     public void newPiece(String BlockType){
-        GamePiece temp = new GamePiece(GridX/2, 1, BlockType, 0);
+    	int a = (int)(Math.random() * 4);
+        GamePiece temp = new GamePiece(GridX/2, 1, BlockType, a);
         GameObjects.add(temp);
     }
 
@@ -299,6 +300,13 @@ public class Tetris{
         return ans;
     }
 
+ public void makeBlockAppear() {
+    	int a = (int)(Math.random() * 7);
+    	String [] s = {"O","T","S","J","L","Z","I"};
+    	this.update(s[a]);
+
+    }
+
 //Reset,Clear,Delay---------------------------------------------------------------------------------------------------------------    
     public void reset(){
         for(int i = 0; i < Game.length; i++) for(int j = 0; j < Game.length; j++) Game[i][j] = GameReset[i][j];
@@ -321,39 +329,47 @@ public class Tetris{
 
 //Main----------------------------------------------------------------------------------------------------------------------------
     public static void main (String [] args){
-        Thread thread2 = new Thread();
-	Runnable r = new ScanPrint();
-        thread2.setDaemon(true);
-        thread2.setPriority(Thread.MIN_PRIORITY);
-        thread2.start();
-        Tetris test = new Tetris(50, 50);
+       /*
+        Tetris test = new Tetris(20, 20);
         clear();
         for(int i = 0; i < 20; i++){
             delay();
             clear();
-            test.update("O");
+            test.makeBlockAppear();
             System.out.println(test.printGame());
-
-           //thread2.start();
             try {
             Thread.sleep(time);
             }
             catch(InterruptedException ex) {
                 thread2.interrupt();
-            }     
-}
-        for(int i = 0; i < 80; i++){
-            delay();
-            clear();
-            test.update("T");
-            System.out.println(test.printGame());
-try {
-            Thread.sleep(time);
             }
-            catch(InterruptedException ex) {
-                thread2.interrupt();
-            }
+            
+            ScanPrint s = (ScanPrint)r;
+           
+            /*
+            Scanner s = new Scanner (System.in);
+            String message = s.next();
+            test.turnGamePiece(test.GameObjects.get(0),message);
+            
         }
+        */
+        
+        for (int i = 0 ;i < 80; i++) {
+        	
+        	try {
+                Thread.sleep(1000);
+                }
+                catch(InterruptedException ex) {
+                    thread2.interrupt();
+                }
+                
+                ScanPrint s = (ScanPrint)r;
+                System.out.println(s.message);
+                
+       }
+
+        
+    }
 
     }
 

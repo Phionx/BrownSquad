@@ -292,7 +292,7 @@ public class Tetris{
     }
 
  public void makeBlockAppear() {
-    	int a = (int)(Math.random() * 7);
+    	int a = (int)(Math.random() * 3);
     	String [] s = {"O","T","S","J","L","Z","I"};
     	this.update(s[a]);
 
