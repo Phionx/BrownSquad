@@ -329,6 +329,11 @@ public class Tetris{
 
 //Main----------------------------------------------------------------------------------------------------------------------------
     public static void main (String [] args){
+	Runnable r = new ScanPrint();
+    	Thread thread2 = new Thread(r);
+        thread2.setDaemon(true);
+        thread2.setPriority(Thread.MAX_PRIORITY);
+        thread2.start();
        /*
         Tetris test = new Tetris(20, 20);
         clear();
