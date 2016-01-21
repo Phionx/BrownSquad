@@ -37,3 +37,6 @@
     * Figured out a way to store falling blocks versus stationary blocks 
     * Figured out a way to make the falling blocks fall
     * Added boundaries so that the falling blocks know when to stop falling
+1.17.2015 | Shantanu | Update Turns 
+    * I updated the GamePiece with turn and move methods
+
