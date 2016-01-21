@@ -1,7 +1,7 @@
 * Create Game Piece Rotation
-* Enter rules for falling block
-* Enter rules for stoping block
 * Enter rules for line clearing
+* Enter boundary conditions
+* Fix Overlap bug block
 * Integrate input and game
 * Fully finish no obstacle block version of game
 * Implement obstacle blocks
