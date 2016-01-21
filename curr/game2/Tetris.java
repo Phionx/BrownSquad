@@ -4,6 +4,7 @@ public class Tetris{
 //Instance Variables
     public static final int time = 200;
     public int GridX, GridY;
+	public static String mes = "";
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
@@ -207,8 +208,8 @@ public class Tetris{
         }
     }
 //AddToGame------------------------------------------------------------------------------------------------------------------------
-     public void newPiece(String BlockType){
-    	int a = (int)(Math.random() * 3);
+    public void newPiece(String BlockType){
+    	int a = (int)(Math.random() * 4);
         GamePiece temp = new GamePiece(GridX/2, 1, BlockType, a);
         GameObjects.add(temp);
     }
@@ -242,7 +243,44 @@ public class Tetris{
             Game[temp.X][temp.Y].state = true;
         }
     }
+    public void turnGamePiece(GamePiece shape,String change_direction){
+    	
+    	if (change_direction.equals("w")) {
+    		if (shape.Turn == 0) shape.Turn = 1;
+    		else if (shape.Turn == 1) shape.Turn = 2;
+    		else if (shape.Turn == 2) shape.Turn = 3;
+    		else if (shape.Turn == 3) shape.Turn = 2;
+  
+    		}
+    	if (change_direction.equals("s")) {
+    		if (shape.Turn == 0) shape.Turn = 3;
+    		else if (shape.Turn == 1) shape.Turn = 0;
+    		else if (shape.Turn == 2) shape.Turn = 1;
+    		else if (shape.Turn == 3) shape.Turn = 0;
+  
+    		}
 
+	if (change_direction.equals("a")) {
+    		shape.XPos--;
+    	}
+    	if(change_direction.equals("d")) {
+    		shape.XPos++;
+    	}
+
+    	
+    	shape.Pos = shape.ALL[shape.type -1][shape.Turn];
+    }
+    	
+    public void moveGamePiece(GamePiece shape,String change_direction){ 
+    	if (change_direction.equals("a")) {
+    		shape.XPos--;
+    	}
+    	if(change_direction.equals("d")) {
+    		shape.XPos++;
+    	}
+        
+    }
+    
 //Checkers------------------------------------------------------------------------------------------------------------------------
     /*
     public void checkClearLine(){
@@ -271,6 +309,13 @@ public class Tetris{
         return ans;
     }
 
+ public void makeBlockAppear() {
+    	int a = (int)(Math.random() * 7);
+    	String [] s = {"O","T","S","J","L","Z","I"};
+    	this.update(s[a]);
+
+    }
+
 //Reset,Clear,Delay---------------------------------------------------------------------------------------------------------------    
     public void reset(){
         for(int i = 0; i < Game.length; i++) for(int j = 0; j < Game.length; j++) Game[i][j] = GameReset[i][j];
@@ -291,30 +336,60 @@ public class Tetris{
         }
     }
 
- public void makeBlockAppear() {
-    	int a = (int)(Math.random() * 3);
-    	String [] s = {"O","T","S","J","L","Z","I"};
-    	this.update(s[a]);
-
+    public boolean stuffInTop() {
+    	if (!this.GameObjects.isEmpty()) {
+    	GamePiece g = GameObjects.get(0);
+    	if ((g.YPos == 1)&& this.Game[g.XPos][g.YPos+4].state==false){
+    		
+    		return true;
+    	}
+    	}
+    	return false;
     }
+    
+    public void createGame() {
+    	
+    	while (!stuffInTop()) {
+    		Runnable r = new ScanPrint();
+        	Thread thread2 = new Thread(r);
+            thread2.setDaemon(true);
+            thread2.setPriority(Thread.MAX_PRIORITY);
+            thread2.start();
+    		delay();
+            clear();
+            this.makeBlockAppear();
+            System.out.println(this.printGame());
+            //System.out.println(this.stuffInTop());
+            try {
+            Thread.sleep(1100);
+            }
+            catch(InterruptedException ex) {
+                thread2.interrupt();
+            }
+            if (!this.GameObjects.isEmpty()) {          
+            this.turnGamePiece(this.GameObjects.get(0),mes);
+            mes = "";
+            }
+    		
+    	}
+           
+ 
+    }
+
 //Main----------------------------------------------------------------------------------------------------------------------------
     public static void main (String [] args){
-        Tetris test = new Tetris(50, 50);
+    	
+    
+        Tetris test = new Tetris(20, 20);
         clear();
-        for(int i = 0; i < 20; i++){
-            delay();
-            clear();
-            test.makeBlockAppear();
-            System.out.println(test.printGame());
-        }
-        for(int i = 0; i < 80; i++){
-            delay();
-            clear();
-            test.update("T");
-            System.out.println(test.printGame());
-        }
+        test.createGame();
+        
+
+
+        
+    }
 
     }
 
 
-}
+
