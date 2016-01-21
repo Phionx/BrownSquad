@@ -361,7 +361,7 @@ public class Tetris{
             System.out.println(this.printGame());
             //System.out.println(this.stuffInTop());
             try {
-            Thread.sleep(500);
+            Thread.sleep(1100);
             }
             catch(InterruptedException ex) {
                 thread2.interrupt();
