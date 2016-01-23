@@ -246,18 +246,12 @@ public class Tetris{
     public void turnGamePiece(GamePiece shape,String change_direction){
     	
     	if (change_direction.equals("w")) {
-    		if (shape.Turn == 0) shape.Turn = 1;
-    		else if (shape.Turn == 1) shape.Turn = 2;
-    		else if (shape.Turn == 2) shape.Turn = 3;
-    		else if (shape.Turn == 3) shape.Turn = 2;
+    		shape.turnPieceUp();
   
     		}
     	if (change_direction.equals("s")) {
-    		if (shape.Turn == 0) shape.Turn = 3;
-    		else if (shape.Turn == 1) shape.Turn = 0;
-    		else if (shape.Turn == 2) shape.Turn = 1;
-    		else if (shape.Turn == 3) shape.Turn = 0;
-  
+    		
+  		shape.turnPieceDown();
     		}
 
 	if (change_direction.equals("a")) {
@@ -361,13 +355,14 @@ public class Tetris{
             System.out.println(this.printGame());
             //System.out.println(this.stuffInTop());
             try {
-            Thread.sleep(500);
+            Thread.sleep(2000);
             }
             catch(InterruptedException ex) {
                 thread2.interrupt();
             }
             if (!this.GameObjects.isEmpty()) {          
             this.turnGamePiece(this.GameObjects.get(0),mes);
+         //   System.out.println(mes);
             mes = "";
             }
     		
@@ -380,7 +375,7 @@ public class Tetris{
     public static void main (String [] args){
     	
     
-        Tetris test = new Tetris(20, 20);
+        Tetris test = new Tetris(20,20);
         clear();
         test.createGame();
         

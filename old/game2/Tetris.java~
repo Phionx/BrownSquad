@@ -336,49 +336,55 @@ public class Tetris{
         }
     }
 
-//Main----------------------------------------------------------------------------------------------------------------------------
-    public static void main (String [] args){
-	Runnable r = new ScanPrint();
-    	Thread thread2 = new Thread(r);
-        thread2.setDaemon(true);
-        thread2.setPriority(Thread.MAX_PRIORITY);
-        thread2.start();
-       
-        Tetris test = new Tetris(20, 20);
-        clear();
-        for(int i = 0; i < 20; i++){
-            delay();
+    public boolean stuffInTop() {
+    	if (!this.GameObjects.isEmpty()) {
+    	GamePiece g = GameObjects.get(0);
+    	if ((g.YPos == 1)&& this.Game[g.XPos][g.YPos+4].state==false){
+    		
+    		return true;
+    	}
+    	}
+    	return false;
+    }
+    
+    public void createGame() {
+    	
+    	while (!stuffInTop()) {
+    		Runnable r = new ScanPrint();
+        	Thread thread2 = new Thread(r);
+            thread2.setDaemon(true);
+            thread2.setPriority(Thread.MAX_PRIORITY);
+            thread2.start();
+    		delay();
             clear();
-            test.makeBlockAppear();
-            System.out.println(test.printGame());
+            this.makeBlockAppear();
+            System.out.println(this.printGame());
+            //System.out.println(this.stuffInTop());
             try {
-            Thread.sleep(time);
+            Thread.sleep(500);
             }
             catch(InterruptedException ex) {
                 thread2.interrupt();
             }
-            
+            if (!this.GameObjects.isEmpty()) {          
+            this.turnGamePiece(this.GameObjects.get(0),mes);
+            mes = "";
+            }
+    		
+    	}
            
-            test.turnGamePiece(test.GameObjects.get(0),mes);
-	    mes = "";
-            
-        }
+ 
+    }
+
+//Main----------------------------------------------------------------------------------------------------------------------------
+    public static void main (String [] args){
+    	
+    
+        Tetris test = new Tetris(20, 20);
+        clear();
+        test.createGame();
         
-        
-        for (int i = 0 ;i < 80; i++) {
-        	
-        	try {
-                Thread.sleep(1000);
-                }
-                catch(InterruptedException ex) {
-                    thread2.interrupt();
-                }
-                
-               
-                System.out.println(mes);
-		mes = "";
-                
-       }
+
 
         
     }
