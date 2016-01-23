@@ -340,9 +340,28 @@ public class Tetris{
     	}
     	return false;
     }
-    
+    public static void printtitlePage () {
+
+String a0="__________                             "+"\n";
+String a1="\\______   \\_______  ______  _  ______  "+"\n";
+String a2=" |    |  _/\\_  __ \\/  _ \\ \\/ \\/ /    \\ "+"\n";
+String a3=" |    |   \\ |  | \\(  <_> )     /   |  \\"+"\n";
+String a4=" |______  / |__|   \\____/ \\/\\_/|___|  /"+"\n";
+String a5="        \\/                          \\/ "+"\n";
+String a6="  __          __         .__           "+"\n";
+String a7="_/  |_  _____/  |________|__| ______   "+"\n";
+String a8="\\   __\\/ __ \\   __\\_  __ \\  |/  ___/   "+"\n";
+String a9=" |  | \\  ___/|  |  |  | \\/  |\\___ \\    "+"\n";
+String b0=" |__|  \\___  >__|  |__|  |__/____  >   "+"\n";
+String b1="           \\/                    \\/    "+"\n";
+System.out.println(ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+b1 + ANSI_RED);
+
+	
+	}
+
 	public void begin () {
-		System.out.println("Welcome to Brown Tetris, would you like to start a game?" + "\n" + ANSI_GREEN + "if yes press y" + ANSI_RESET);
+		printtitlepage();
+		System.out.println("Would you like to start a game?" + "\n" + ANSI_GREEN + "if yes press y" + ANSI_RESET);
 		Scanner s = new Scanner(System.in);
 		String userin = "";
 		if (s.hasNext()) {
