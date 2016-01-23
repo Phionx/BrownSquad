@@ -300,7 +300,7 @@ public class Tetris{
             }
             ans += "\n";
         }
-        return ans;
+        return ans + ANSI_RESET;
     }
 
  public void makeBlockAppear() {
@@ -341,6 +341,17 @@ public class Tetris{
     	return false;
     }
     
+	public void begin () {
+		System.out.println("Welcome to Brown Tetris, would you like to start a game?" + "\n" + ANSI_GREEN + "if yes press y" + ANSI_RESET);
+		Scanner s = new Scanner(System.in);
+		String userin = "";
+		if (s.hasNext()) {
+			userin = s.next();
+		}
+		if (userin.equals("Y") || userin.equals("y") || userin.equals("Yes") || userin.equals("yes")) {
+		this.createGame();
+}
+	}
     public void createGame() {
     	
     	while (!stuffInTop()) {
@@ -377,7 +388,7 @@ public class Tetris{
     
         Tetris test = new Tetris(20,20);
         clear();
-        test.createGame();
+        test.begin();
         
 
 
