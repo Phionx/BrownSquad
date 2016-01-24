@@ -8,18 +8,15 @@ import java.util.Scanner;
 
 
 public class Tetris{
-	public void begin () {
-		printTit();
-		System.out.println("Would you like to start a game?" + "\n" + ANSI_GREEN + "if yes press y" + ANSI_RESET);
-		Scanner s = new Scanner(System.in);
-		String userin = "";
-		if (s.hasNext()) {
-			userin = s.next();
-		}
-		if (userin.equals("Y") || userin.equals("y") || userin.equals("Yes") || userin.equals("yes")) {
-		this.createGame();
-}
-	}
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_PURPLE = "\u001B[35m";
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_WHITE = "\u001B[37m";
 public static class TextPanel extends Panel {
 	DefaultLayoutManager d = new DefaultLayoutManager();
 			// this.setLayoutManager(new DefaultLayoutManager());
@@ -42,25 +39,8 @@ public static class TextPanel extends Panel {
         public static final int time = 500;
         public int GridX, GridY;
 	public static String mes = "";
-	public static final String ANSI_RESET = "\u001B[0m";
-	public static final String ANSI_BLACK = "\u001B[30m";
-	public static final String ANSI_RED = "\u001B[31m";
-	public static final String ANSI_GREEN = "\u001B[32m";
-	public static final String ANSI_YELLOW = "\u001B[33m";
-	public static final String ANSI_BLUE = "\u001B[34m";
-	public static final String ANSI_PURPLE = "\u001B[35m";
-	public static final String ANSI_CYAN = "\u001B[36m";
-	public static final String ANSI_WHITE = "\u001B[37m";
 	public static boolean gamerun = true;
-/*May not be necessary   
-    public static final GridPiece [][] O_Piece = new GridPiece [2][2];
-    public static final GridPiece [][] J_Piece = new GridPiece [3][3];
-    public static final GridPiece [][] L_Piece = new GridPiece [3][3];
-    public static final GridPiece [][] I_Piece = new GridPiece [4][4];
-    public static final GridPiece [][] S_Piece = new GridPiece [3][3];
-    public static final GridPiece [][] T_Piece = new GridPiece [3][3];
-    public static final GridPiece [][] Z_Piece = new GridPiece [3][3];
-*/
+
     public ArrayList<GamePiece> GameObjects = new ArrayList<GamePiece>();
     public ArrayList<GameBlock> GameBlocks = new ArrayList<GameBlock>();
     public GridPiece [][] Game;
@@ -364,12 +344,12 @@ System.out.println(ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+
 public static Window w;
 public static Tetris test = new Tetris(20,20);
 //Main----------------------------------------------------------------------------------------------------------------------------
-    public static void main (String [] args){
+    public static void startGame (){
     	
     
 		
         	clear();
-                test.begin();
+                test.createGame();
 
 
         
