@@ -1,9 +1,39 @@
+import jcurses.event.*;
+import jcurses.system.*;
+import jcurses.util.*;
+import jcurses.widgets.*;
 import java.util.*;
 
 public class Tetris{
-//Instance Variables
+    //Jcurses helper class
+    public static class TextPanel extends Panel {
+	DefaultLayoutManager d = new DefaultLayoutManager();
+			// this.setLayoutManager(new DefaultLayoutManager());
+	NewTextComponent t = new NewTextComponent(40, 20);
+		TextPanel() {
+			DefaultLayoutManager d = new DefaultLayoutManager();
+			// this.setLayoutManager(new DefaultLayoutManager());
+			NewTextComponent t = new NewTextComponent(40, 20);
+			d.bindToContainer(this);
+			d.addWidget(t, 0, 0, 40, 20, WidgetsConstants.ALIGNMENT_CENTER,
+					WidgetsConstants.ALIGNMENT_CENTER);
+
+		}
+		public void printToScreen(String s,int x, int y, CharColor c) {
+			t.printString(s, x, y, c);
+		}
+	}
+
+
+    
+//Instance Variables-----------------------------------------------------------------------------------------------------------------------
+
+    //holds game in jcurses
+    public static TextPanel hi = new Tetris.TextPanel();
+    public static Window w;
+
     //holds time delay
-    public static final int time = 200;
+    public static final int time = 500;
     
     //keeps game running
     public boolean gamerun = true;
@@ -13,6 +43,9 @@ public class Tetris{
 
     //holds position message
 	public static String mes = "";
+
+    //holds game score
+    public int score = 0;
 
     //holds colors
 	public static final String ANSI_RESET = "\u001B[0m";
@@ -175,8 +208,12 @@ public class Tetris{
     }
     
     //Helps a GamePiece fall 
-    //adds the Game Blocks to the game .. checks conditions
-    //adds game pieces to game
+    //clears field
+    //adds GameBlocks
+    //clears any full lines
+    //turns the GamePiece only if it doesn't do anything illegal
+    //makes the GamePiece fall only if it doesn't do anything illegal
+    //adds teh GamePiece officially to the Game
     public void fallGamePiece(GamePiece temp){
         GridPiece [][] tempState = Game;
         reset();
@@ -221,6 +258,7 @@ public class Tetris{
     
     //this clears a line of game blocks and brings the game blocks above it down
     public void clearLine(int height){
+        score += 10;
         for(Iterator<GameBlock> i = GameBlocks.iterator(); i.hasNext();){
             GameBlock temp = i.next();
             if(temp.Y == height){
@@ -382,6 +420,7 @@ public class Tetris{
         addGameBlocks();
     }
 
+    //work on this to end the Game
     public boolean stuffInTop() {
     	if (!this.GameObjects.isEmpty()) {
     	GamePiece g = GameObjects.get(0);
@@ -395,6 +434,7 @@ public class Tetris{
 
 //Printing------------------------------------------------------------------------------------------------------------------------        
     //prints the entire Tetris Game field
+    //work on asthetic
     public String printGame(){
         String ans = "\n\n\n\t\t";
         for(GridPiece[] i: Game){
@@ -434,87 +474,53 @@ public class Tetris{
         }
     }
     
-//Intializing Game---------------------------------------------------------------------------------------------------------------    
-    //prints title page
-    public static void printTitle() {
+//Intializing Game-------------------------------------------------------------------------------------------------------------------
+    //begins actual Game
+    public void startGame(){
+        clear();
+        this.runGame();
+    }
+    //runs actual Game
+    public void runGame() {
+        //setup Jcurses listener
+        w = new Window(40, 20, true, "Test Window");
+		w.setRootPanel(hi);
+		w.addListener(new WindowListener() {
+			public void windowChanged(WindowEvent we) {
+				if (we.getType() == WindowEvent.CLOSING) {
+					w.hide();
+					w.close();
+					System.exit(0);
+				}
+			}
+		});
 
-String a0="\n\n\n\t\t__________                             "+"\n";
-String a1="\t\t\\______   \\_______  ______  _  ______  "+"\n";
-String a2="\t\t |    |  _/\\_  __ \\/  _ \\ \\/ \\/ /    \\ "+"\n";
-String a3="\t\t |    |   \\ |  | \\(  <_> )     /   |  \\"+"\n";
-String a4="\t\t |______  / |__|   \\____/ \\/\\_/|___|  /"+"\n";
-String a5="\t\t        \\/                          \\/ "+"\n";
-String a6="\t\t  __          __         .__           "+"\n";
-String a7="\t\t_/  |_  _____/  |________|__| ______   "+"\n";
-String a8="\t\t\\   __\\/ __ \\   __\\_  __ \\  |/  ___/   "+"\n";
-String a9="\t\t |  | \\  ___/|  |  |  | \\/  |\\___ \\    "+"\n";
-String b0="\t\t |__|  \\___  >__|  |__|  |__/____  >   "+"\n";
-String b1="\t\t           \\/                    \\/    "+"\n";
-
-        String title = ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+b1 + ANSI_RED;
-
-        System.out.println(title);
-	}
-
-    //Title Page Beginning
-	public void begin () {
-		printTitle();
-		System.out.println("\t\tWould you like to start a game?" + "\n" + ANSI_GREEN + "\n\t\tif yes press y" + ANSI_RESET);
-		Scanner s = new Scanner(System.in);
-		String userin = "";
-		if (s.hasNext()) {
-			userin = s.next();
-		}
-		if (userin.equals("Y") || userin.equals("y") || userin.equals("Yes") || userin.equals("yes")) {
-		    this.createGame();
-        } 
-	}
-
-
-    public void createGame() {
-    	
+        //run Game thread
     	while (gamerun) {
     		Runnable r = new ScanPrint();
         	Thread thread2 = new Thread(r);
             thread2.setDaemon(true);
             thread2.setPriority(Thread.MAX_PRIORITY);
             thread2.start();
-    		delay();
-            clear();
+    	    delay();
+            this.printGame();
             this.update();
-            System.out.println(this.printGame());
-            //System.out.println(this.stuffInTop());
-            try {
-            Thread.sleep(2000);
-            }
-            catch(InterruptedException ex) {
-                thread2.interrupt();
-            }
-            //if (!this.GameObjects.isEmpty()) {          
-            //this.turnGamePiece(this.GameObjects.get(0),mes);
-         //   System.out.println(mes);
-            //mes = "";
-            //}
-    		
-    	}
+        }
+        delay();
+        printEnd();
+    	Toolkit.shutdown();
+    }
            
- 
-    }
 
-//Main----------------------------------------------------------------------------------------------------------------------------
-    public static void main (String [] args){
-    	
-    
-        Tetris test = new Tetris(20,20);
+//Game End------------------------------------------------------------------------------------------------------------------------
+    public void printEnd(){
         clear();
-        test.begin();
-        
-
-
-        
+        System.out.println("THANK YOU FOR PLAYING BROWN TETRIS :D!\nPlease play again!\nHere was your final score: " + score);
     }
-
+//Main----------------------------------------------------------------------------------------------------------------------------
+    public static void main (String [] args){ 
     }
+}
 
 
 
