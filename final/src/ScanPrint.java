@@ -18,8 +18,15 @@ ScanPrint() {
 	public void run() {
 		while(true) {
             InputChar c = Toolkit.readCharacter();
+	    if (!c.isSpecialCode()) {
             String a = "" + c.getCharacter();
             Tetris.test.turnGamePiece(Tetris.test.GameObjects.get(0),a);
+		}
+		else {
+			 String a = "" + c.getCode(); 
+			 Tetris.test.turnGamePiece(Tetris.test.GameObjects.get(0),a);
+			}
+		
 		}
 
 	}
