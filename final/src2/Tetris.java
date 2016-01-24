@@ -273,27 +273,44 @@ public class Tetris{
     }
     
     //changes the Postion or orientation of game piece according to user input
-    public void turnGamePiece(GamePiece shape,String change_direction){
-        switch(change_direction){
-            case "w":
-                turnUp(shape);
-                break;
-            case "s":
-                turnDown(shape);
-                break;
-            case "a":
-                moveLeft(shape);
-                break;
-            case "d":
-                moveRight(shape);
-                break;
-            case "e":
-                gamerun = false;
-                break;
-            default:
-                break;
-        }
-        mes = "";
+ public void turnGamePiece(GamePiece shape,String change_direction){
+    	
+    	if (change_direction.equals("w")) {
+    		turnUp(shape);
+  
+    		}
+    	if (change_direction.equals("s")) {
+    		
+  		turnDown(shape);
+    		}
+
+	if (change_direction.equals("a")) {
+    		moveLeft(shape);
+    	}
+    	if(change_direction.equals("d")) {
+    		moveRight(shape);
+    	}
+/*------------------ARROW KEYS----------------------*/
+    	if (change_direction.equals("" + InputChar.KEY_UP)) {
+    		turnUp(shape);
+  
+    		}
+    	if (change_direction.equals("" + InputChar.KEY_DOWN)) {
+  		turnDown(shape);
+    		}
+
+	if (change_direction.equals("" + InputChar.KEY_LEFT)) {
+    		moveLeft(shape);
+    	}
+    	if(change_direction.equals("" + InputChar.KEY_RIGHT)) {
+    		moveRight(shape);
+    	}
+if (change_direction.equals("e")) {
+gamerun = false;
+  
+    		}
+    	
+    	shape.Pos = shape.ALL[shape.type -1][shape.Turn];
     }
 
     public void turnUp(GamePiece shape){
