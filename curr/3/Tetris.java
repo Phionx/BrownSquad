@@ -163,20 +163,27 @@ public class Tetris{
 //Movement------------------------------------------------------------------------------------------------------------------------
     
     //updater function
-    public void update(String type){
+    public void update(){
+        int a = (int)(Math.random() * 7);
+    	String [] s = {"O","T","S","J","L","Z","I"};
+
         reset();
         if(GameObjects.isEmpty()){
-            newPiece(type);
+            newPiece(s[a]);
         }
         fallGamePiece(GameObjects.get(0));
     }
     
     //Helps a GamePiece fall 
+    //adds the Game Blocks to the game .. checks conditions
+    //adds game pieces to game
     public void fallGamePiece(GamePiece temp){
         GridPiece [][] tempState = Game;
         reset();
         int lowBlock = 0;
         addGameBlocks();
+        checkClearLine();
+        turnGamePiece(temp, mes);
         for(int i = 0; i < temp.Size; i++){
             for(int j = 0; j < temp.Size; j++){
                 if(temp.Pos[j][i]) lowBlock = j;
@@ -229,22 +236,75 @@ public class Tetris{
     public void turnGamePiece(GamePiece shape,String change_direction){
         switch(change_direction){
             case "w":
-                shape.up();
+                turnUp(shape);
                 break;
             case "s":
-                shape.down();
+                turnDown(shape);
                 break;
             case "a":
-                shape.XPos--;
+                moveLeft(shape);
                 break;
             case "d":
-                shape.XPos++;
+                moveRight(shape);
                 break;
             case "e":
                 gamerun = false;
                 break;
             default:
                 break;
+        }
+        mes = "";
+    }
+
+    public void turnUp(GamePiece shape){
+        GamePiece temp = new GamePiece(shape);
+        shape.up();
+        for(int i = 0; i < temp.Size; i++){
+            for(int j = 0; j < temp.Size; j++){
+                if(Game[shape.YPos + i][shape.XPos + j].state && shape.Pos[i][j]) {
+                    shape = new GamePiece(temp);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void turnDown(GamePiece shape){
+        GamePiece temp = new GamePiece(shape);
+        shape.down();
+        for(int i = 0; i < temp.Size; i++){
+            for(int j = 0; j < temp.Size; j++){
+                if(Game[shape.YPos + i][shape.XPos + j].state && shape.Pos[i][j]){
+                    shape = new GamePiece(temp);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void moveRight(GamePiece shape){
+        GamePiece temp = new GamePiece(shape);
+        shape.XPos++;
+        for(int i = 0; i < temp.Size; i++){
+            for(int j = 0; j < temp.Size; j++){
+                if(Game[shape.YPos + i][shape.XPos + j].state && shape.Pos[i][j]){
+                    shape = new GamePiece(temp);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void moveLeft(GamePiece shape){
+        GamePiece temp = new GamePiece(shape);
+        shape.XPos--;
+        for(int i = 0; i < temp.Size; i++){
+            for(int j = 0; j < temp.Size; j++){
+                if(Game[shape.YPos + i][shape.XPos + j].state && shape.Pos[i][j]) {
+                    shape = new GamePiece(temp);
+                    break;
+                }
+            }
         }
     }
 
@@ -265,7 +325,7 @@ public class Tetris{
 //AddToGame------------------------------------------------------------------------------------------------------------------------
     //adds a random new GamePiece to the game
     public void newPiece(String BlockType){
-    	int a = (int)(Math.random() * 7);
+    	int a = (int)(Math.random() * 4);
         GamePiece temp = new GamePiece(GridX/2, 1, BlockType, a);
         GameObjects.add(temp);
     }
@@ -350,13 +410,6 @@ public class Tetris{
         return ans + ANSI_RESET;
     }
 
-    //?????
-    public void makeBlockAppear() {
-    	int a = (int)(Math.random() * 7);
-    	String [] s = {"O","T","S","J","L","Z","I"};
-    	this.update(s[a]);
-
-    }
 
 //Reset,Clear,Delay---------------------------------------------------------------------------------------------------------------    
     //resets game field
@@ -428,7 +481,7 @@ String b1="\t\t           \\/                    \\/    "+"\n";
             thread2.start();
     		delay();
             clear();
-            this.makeBlockAppear();
+            this.update();
             System.out.println(this.printGame());
             //System.out.println(this.stuffInTop());
             try {
@@ -437,11 +490,11 @@ String b1="\t\t           \\/                    \\/    "+"\n";
             catch(InterruptedException ex) {
                 thread2.interrupt();
             }
-            if (!this.GameObjects.isEmpty()) {          
-            this.turnGamePiece(this.GameObjects.get(0),mes);
+            //if (!this.GameObjects.isEmpty()) {          
+            //this.turnGamePiece(this.GameObjects.get(0),mes);
          //   System.out.println(mes);
-            mes = "";
-            }
+            //mes = "";
+            //}
     		
     	}
            

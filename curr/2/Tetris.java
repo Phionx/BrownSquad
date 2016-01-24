@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Tetris{
 //Instance Variables
+    //hold time delay
     public static final int time = 200;
     public int GridX, GridY;
 	public static String mes = "";
@@ -23,9 +24,17 @@ public class Tetris{
     public static final GridPiece [][] T_Piece = new GridPiece [3][3];
     public static final GridPiece [][] Z_Piece = new GridPiece [3][3];
 */
+
+    //Holds falling GamePieces such as "O" or "T" 
     public ArrayList<GamePiece> GameObjects = new ArrayList<GamePiece>();
+    
+    //hodls individual stationary blocks
     public ArrayList<GameBlock> GameBlocks = new ArrayList<GameBlock>();
+    
+    //holds all GridPieces in the Tetris Game Map
     public GridPiece [][] Game;
+
+    //holds empty original Tetris Game Map -- used to reset field
     public GridPiece [][] GameReset;
 
 //Initialization ------------------------------------------------------------------------------------------------------------------------
@@ -351,36 +360,39 @@ public class Tetris{
     	}
     	return false;
     }
-    public static void printTit () {
+    public static void printTitle() {
 
-String a0="__________                             "+"\n";
-String a1="\\______   \\_______  ______  _  ______  "+"\n";
-String a2=" |    |  _/\\_  __ \\/  _ \\ \\/ \\/ /    \\ "+"\n";
-String a3=" |    |   \\ |  | \\(  <_> )     /   |  \\"+"\n";
-String a4=" |______  / |__|   \\____/ \\/\\_/|___|  /"+"\n";
-String a5="        \\/                          \\/ "+"\n";
-String a6="  __          __         .__           "+"\n";
-String a7="_/  |_  _____/  |________|__| ______   "+"\n";
-String a8="\\   __\\/ __ \\   __\\_  __ \\  |/  ___/   "+"\n";
-String a9=" |  | \\  ___/|  |  |  | \\/  |\\___ \\    "+"\n";
-String b0=" |__|  \\___  >__|  |__|  |__/____  >   "+"\n";
-String b1="           \\/                    \\/    "+"\n";
-System.out.println(ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+b1 + ANSI_RED);
+String a0="\n\n\n\t\t__________                             "+"\n";
+String a1="\t\t\\______   \\_______  ______  _  ______  "+"\n";
+String a2="\t\t |    |  _/\\_  __ \\/  _ \\ \\/ \\/ /    \\ "+"\n";
+String a3="\t\t |    |   \\ |  | \\(  <_> )     /   |  \\"+"\n";
+String a4="\t\t |______  / |__|   \\____/ \\/\\_/|___|  /"+"\n";
+String a5="\t\t        \\/                          \\/ "+"\n";
+String a6="\t\t  __          __         .__           "+"\n";
+String a7="\t\t_/  |_  _____/  |________|__| ______   "+"\n";
+String a8="\t\t\\   __\\/ __ \\   __\\_  __ \\  |/  ___/   "+"\n";
+String a9="\t\t |  | \\  ___/|  |  |  | \\/  |\\___ \\    "+"\n";
+String b0="\t\t |__|  \\___  >__|  |__|  |__/____  >   "+"\n";
+String b1="\t\t           \\/                    \\/    "+"\n";
+
+String title = ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+b1 + ANSI_RED;
+
+System.out.println(title);
 
 	
 	}
 
 	public void begin () {
-		printTit();
-		System.out.println("Would you like to start a game?" + "\n" + ANSI_GREEN + "if yes press y" + ANSI_RESET);
+		printTitle();
+		System.out.println("\t\tWould you like to start a game?" + "\n" + ANSI_GREEN + "\n\t\tif yes press y" + ANSI_RESET);
 		Scanner s = new Scanner(System.in);
 		String userin = "";
 		if (s.hasNext()) {
 			userin = s.next();
 		}
 		if (userin.equals("Y") || userin.equals("y") || userin.equals("Yes") || userin.equals("yes")) {
-		this.createGame();
-}
+		    this.createGame();
+        } 
 	}
     public void createGame() {
     	

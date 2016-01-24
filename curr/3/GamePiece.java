@@ -52,6 +52,15 @@ public class GamePiece{
     public static final boolean [][] I_3 = {{true,false,false,false},{true,false,false,false}, {true,false,false,false}, {true,false,false,false}};
     public static final boolean [][] I_4 = {{true,true,true,true},{false,false,false,false}, {false,false,false,false}, {false,false,false,false}};
 
+    public GamePiece(GamePiece temp){
+        Block = temp.Block;
+        XPos = temp.XPos;
+        YPos = temp.YPos;
+        Turn = temp.Turn;
+        Pos = temp.Pos;
+        Size = temp.Size;
+        type = temp.type;
+    }
     public GamePiece(int X, int Y, String BlockType, int TurnPos){ //X, Y are the top left corner of the array, 
        Block = BlockType;                                                       //BlockType is the type of teh piece, TUrn Pos 
        if(BlockType.equals("T")){
