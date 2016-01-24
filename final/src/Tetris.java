@@ -136,6 +136,22 @@ public static class TextPanel extends Panel {
     	if(change_direction.equals("d")) {
     		shape.XPos++;
     	}
+/*------------------ARROW KEYS----------------------*/
+    	if (change_direction.equals("" + InputChar.KEY_UP)) {
+    		shape.turnPieceUp();
+  
+    		}
+    	if (change_direction.equals("" + InputChar.KEY_DOWN)) {
+    		
+  		shape.turnPieceDown();
+    		}
+
+	if (change_direction.equals("" + InputChar.KEY_LEFT)) {
+    		shape.XPos--;
+    	}
+    	if(change_direction.equals("" + InputChar.KEY_RIGHT)) {
+    		shape.XPos++;
+    	}
 if (change_direction.equals("e")) {
 gamerun = false;
   
