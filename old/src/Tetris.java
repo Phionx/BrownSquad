@@ -1,9 +1,41 @@
-import java.util.*;
+import jcurses.event.*;
+import jcurses.system.*;
+import jcurses.util.*;
+import jcurses.widgets.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
 
 public class Tetris{
+public static class TextPanel extends Panel {
+	DefaultLayoutManager d = new DefaultLayoutManager();
+			// this.setLayoutManager(new DefaultLayoutManager());
+	NewTextComponent t = new NewTextComponent(40, 20);
+		TextPanel() {
+			DefaultLayoutManager d = new DefaultLayoutManager();
+			// this.setLayoutManager(new DefaultLayoutManager());
+			NewTextComponent t = new NewTextComponent(40, 20);
+			// t.setCursorLocation(5,5);
+			// t.setTextComponentColors(new
+			// CharColor(CharColor.BLACK,CharColor.GREEN));
+			t.setText(" Hello World");
+			// t.setCursorLocation(0,0);
+			t.setCursorColors(new CharColor(CharColor.BLACK, CharColor.GREEN));
+			t.setText(" Whats up world!");
+			d.bindToContainer(this);
+			d.addWidget(t, 0, 0, 40, 20, WidgetsConstants.ALIGNMENT_CENTER,
+					WidgetsConstants.ALIGNMENT_CENTER);
+
+		}
+		public void printToScreen(String s,int x, int y, CharColor c) {
+			t.printString(s, x, y, c);
+		}
+	}
 //Instance Variables
-    public static final int time = 200;
-    public int GridX, GridY;
+	public static TextPanel hi = new Tetris.TextPanel();
+        public static final int time = 500;
+        public int GridX, GridY;
 	public static String mes = "";
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -14,6 +46,7 @@ public class Tetris{
 	public static final String ANSI_PURPLE = "\u001B[35m";
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_WHITE = "\u001B[37m";
+	public static boolean gamerun = true;
 /*May not be necessary   
     public static final GridPiece [][] O_Piece = new GridPiece [2][2];
     public static final GridPiece [][] J_Piece = new GridPiece [3][3];
@@ -186,8 +219,29 @@ public class Tetris{
         
     }
     
-    public void turnGamePiece(){
-        
+      public void turnGamePiece(GamePiece shape,String change_direction){
+    	
+    	if (change_direction.equals("w")) {
+    		shape.turnPieceUp();
+  
+    		}
+    	if (change_direction.equals("s")) {
+    		
+  		shape.turnPieceDown();
+    		}
+
+	if (change_direction.equals("a")) {
+    		shape.XPos--;
+    	}
+    	if(change_direction.equals("d")) {
+    		shape.XPos++;
+    	}
+if (change_direction.equals("e")) {
+gamerun = false;
+  
+    		}
+    	
+    	shape.Pos = shape.ALL[shape.type -1][shape.Turn];
     }
     
     public void moveGamePiece(){
@@ -243,37 +297,7 @@ public class Tetris{
             Game[temp.X][temp.Y].state = true;
         }
     }
-    public void turnGamePiece(GamePiece shape,String change_direction){
-    	
-    	if (change_direction.equals("w")) {
-    		shape.turnPieceUp();
-  
-    		}
-    	if (change_direction.equals("s")) {
-    		
-  		shape.turnPieceDown();
-    		}
-
-	if (change_direction.equals("a")) {
-    		shape.XPos--;
-    	}
-    	if(change_direction.equals("d")) {
-    		shape.XPos++;
-    	}
-
-    	
-    	shape.Pos = shape.ALL[shape.type -1][shape.Turn];
-    }
-    	
-    public void moveGamePiece(GamePiece shape,String change_direction){ 
-    	if (change_direction.equals("a")) {
-    		shape.XPos--;
-    	}
-    	if(change_direction.equals("d")) {
-    		shape.XPos++;
-    	}
-        
-    }
+    
     
 //Checkers------------------------------------------------------------------------------------------------------------------------
     /*
@@ -287,20 +311,19 @@ public class Tetris{
             if(temp) 
         }
     }*/
-//Printing------------------------------------------------------------------------------------------------------------------------        
-    public String printGame(){
-        String ans = "";
-        for(GridPiece[] i: Game){
-            for(GridPiece j: i) {
-                if(j.state){
-                    ans += j.color + j.design;
-                }else {
-                    ans += " ";
+//Printing------------------------------------------------------------------------------------------------------------------------ 
+       
+    public void printGame(){
+        for (int y = 0; y < Game.length;y++) {
+	for (int x = 0; x < Game[y].length;x++) {
+		if(Game[y][x].state) {
+	hi.printToScreen(Game[y][x].design,x,y,Game[y][x].color);
+			}
+	else {
+                   hi.printToScreen(" ",x,y,Game[y][x].color);
                 }
-            }
-            ans += "\n";
-        }
-        return ans + ANSI_RESET;
+}
+}
     }
 
  public void makeBlockAppear() {
@@ -373,18 +396,20 @@ System.out.println(ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+
 	}
     public void createGame() {
     	
-    	while (!stuffInTop()) {
+    	while (gamerun) {
+
     		Runnable r = new ScanPrint();
         	Thread thread2 = new Thread(r);
             thread2.setDaemon(true);
             thread2.setPriority(Thread.MAX_PRIORITY);
             thread2.start();
-    		delay();
-            clear();
+
+    	    delay();
             this.makeBlockAppear();
-            System.out.println(this.printGame());
+            this.printGame();
             //System.out.println(this.stuffInTop());
-            try {
+            /*
+	    try {
             Thread.sleep(2000);
             }
             catch(InterruptedException ex) {
@@ -392,23 +417,42 @@ System.out.println(ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+
             }
             if (!this.GameObjects.isEmpty()) {          
             this.turnGamePiece(this.GameObjects.get(0),mes);
-         //   System.out.println(mes);
+            System.out.println(mes);
             mes = "";
+*/
             }
+    		Toolkit.shutdown();
     		
     	}
            
  
-    }
+    
 
+public static Window w;
+public static Tetris test = new Tetris(20,20);
 //Main----------------------------------------------------------------------------------------------------------------------------
     public static void main (String [] args){
     	
     
-        Tetris test = new Tetris(20,20);
+
         clear();
-        test.begin();
-        
+                w = new Window(40, 20, true, "Test Window");
+
+		w.setRootPanel(hi);
+
+		// InputChar closeChar = new InputChar('x');
+		// w.setClosingChar(closeChar);
+		w.addListener(new WindowListener() {
+			public void windowChanged(WindowEvent we) {
+				if (we.getType() == WindowEvent.CLOSING) {
+					w.hide();
+					w.close();
+					System.exit(0);
+				}
+			}
+		});
+
+                test.createGame();
 
 
         

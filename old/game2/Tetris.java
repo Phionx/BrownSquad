@@ -392,7 +392,7 @@ System.out.println(ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+
             }
             if (!this.GameObjects.isEmpty()) {          
             this.turnGamePiece(this.GameObjects.get(0),mes);
-         //   System.out.println(mes);
+            System.out.println(mes);
             mes = "";
             }
     		

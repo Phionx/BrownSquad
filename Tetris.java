@@ -261,10 +261,10 @@ public class Tetris{
     		}
 
 	if (change_direction.equals("a")) {
-    		shape.XPos--;
+        --shape.XPos;
     	}
     	if(change_direction.equals("d")) {
-    		shape.XPos++;
+         ++shape.XPos;
     	}
 
     	
@@ -361,7 +361,7 @@ public class Tetris{
             System.out.println(this.printGame());
             //System.out.println(this.stuffInTop());
             try {
-            Thread.sleep(1100);
+            Thread.sleep(time);
             }
             catch(InterruptedException ex) {
                 thread2.interrupt();
