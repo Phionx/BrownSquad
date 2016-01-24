@@ -28,6 +28,8 @@ public class Tetris{
     
 //Instance Variables-----------------------------------------------------------------------------------------------------------------------
 
+    //static Tetris game 
+    public static Tetris test = new Tetris(50,50);
     //holds game in jcurses
     public static TextPanel hi = new Tetris.TextPanel();
     public static Window w;
@@ -476,9 +478,9 @@ public class Tetris{
     
 //Intializing Game-------------------------------------------------------------------------------------------------------------------
     //begins actual Game
-    public void startGame(){
+    public static void startGame(){
         clear();
-        this.runGame();
+        test.runGame();
     }
     //runs actual Game
     public void runGame() {

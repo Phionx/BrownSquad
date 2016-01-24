@@ -49,8 +49,7 @@ public class PlayTetris {
 
 	public static void main (String [] args) {
 		if (begin() == true) {
-			Tetris play = new Tetris(50,50);
-            play.startGame();
+			Tetris.startGame();
 		}
 	}
 
