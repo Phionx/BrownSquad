@@ -340,7 +340,7 @@ public class Tetris{
     	}
     	return false;
     }
-    public static void printtitlePage () {
+    public static void printTit () {
 
 String a0="__________                             "+"\n";
 String a1="\\______   \\_______  ______  _  ______  "+"\n";
@@ -360,7 +360,7 @@ System.out.println(ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+
 	}
 
 	public void begin () {
-		printtitlepage();
+		printTit();
 		System.out.println("Would you like to start a game?" + "\n" + ANSI_GREEN + "if yes press y" + ANSI_RESET);
 		Scanner s = new Scanner(System.in);
 		String userin = "";
