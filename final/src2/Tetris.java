@@ -437,19 +437,17 @@ public class Tetris{
 //Printing------------------------------------------------------------------------------------------------------------------------        
     //prints the entire Tetris Game field
     //work on asthetic
-    public String printGame(){
-        String ans = "\n\n\t\tScore: " + score + "\n\t\t";
-        for(GridPiece[] i: Game){
-            for(GridPiece j: i) {
-                if(j.state){
-                    ans += j.color + j.design;
-                }else {
-                    ans += " ";
+    public void printGame(){
+        for (int y = 0; y < Game.length;y++) {
+	for (int x = 0; x < Game[y].length;x++) {
+		if(Game[y][x].state) {
+	hi.printToScreen(Game[y][x].design,x,y,Game[y][x].color);
+			}
+	else {
+                   hi.printToScreen(" ",x,y,Game[y][x].color);
                 }
-            }
-            ans += "\n\t\t";
-        }
-        return ans + ANSI_RESET;
+}
+}
     }
 
 

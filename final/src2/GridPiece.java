@@ -1,10 +1,18 @@
+import jcurses.system.CharColor;
+
 public class GridPiece {
-    public String color; // color of piece
+    public CharColor color; // color of piece
     public String cellType; //type of cell
     public String design;
     public boolean state;
     public String name;
-    
+    CharColor greenOnBlack = new CharColor(CharColor.BLACK,CharColor.GREEN);
+    CharColor yellowOnBlack = new CharColor(CharColor.BLACK,CharColor.YELLOW);
+    CharColor redOnBlack = new CharColor(CharColor.BLACK,CharColor.RED);
+    CharColor whiteOnBlack = new CharColor(CharColor.BLACK,CharColor.WHITE);
+    CharColor blueOnBlack = new CharColor(CharColor.BLACK,CharColor.BLUE);
+    CharColor magentaOnBlack = new CharColor(CharColor.BLACK,CharColor.MAGENTA);
+    CharColor cyanOnBlack = new CharColor(CharColor.BLACK,CharColor.CYAN);
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
@@ -17,19 +25,19 @@ public class GridPiece {
     public GridPiece(String type, String block){
         this(type);
         name = block;
-        if(block.equals("O")) { color = ANSI_YELLOW;}
-        else if(block.equals("J")) { color = ANSI_BLUE;}
-        else if(block.equals("L")) { color = ANSI_WHITE;}
-        else if(block.equals("I")) { color = ANSI_CYAN;}
-        else if(block.equals("T")) { color = ANSI_PURPLE;}
-        else if(block.equals("Z")) { color = ANSI_RED;}
-        else if(block.equals("S")) { color = ANSI_GREEN;}
+        if(block.equals("O")) { color = yellowOnBlack;}
+        else if(block.equals("J")) { color = blueOnBlack;}
+        else if(block.equals("L")) { color = whiteOnBlack;}
+        else if(block.equals("I")) { color = cyanOnBlack;}
+        else if(block.equals("T")) { color = magentaOnBlack;}
+        else if(block.equals("Z")) { color = redOnBlack;}
+        else if(block.equals("S")) { color = greenOnBlack;}
     }
     public GridPiece(String type){
         cellType = type;
-        color = ANSI_WHITE; 
+        color = whiteOnBlack; 
         if(cellType.equals("Game")){
-            design = "O";
+            design = "X";
             state = false;
         } else if(cellType.equals("Bottom")) {
             design = "=";
@@ -44,3 +52,4 @@ public class GridPiece {
     }
 
 }
+
