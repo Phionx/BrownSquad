@@ -171,19 +171,32 @@ public class Tetris{
     //work on Later
     public void fallGamePieces(){
         for(Iterator<GamePiece> i = GameObjects.iterator(); i.hasNext();){
-            fallGamePiece(i.next());
+            GamePiece temp = i.next();
+            fallGamePiece(temp);
         }
     }
     
-    public void fallGameBlock(){
-        
-    }
-    public void fallGameBlocks(){
-        
+
+    public void fallGameBlockLine(int height){
+        for(ListIterator<GameBlock> i = GameBlocks.listIterator(); i.hasNext();){
+            GameBlock temp = i.next();
+            if(temp.Y == height){
+                temp.Y = temp.Y + 1;
+                i.set(temp);
+            }
+        }
     }
     
-    public void clearLine(){
-        
+    public void clearLine(int height){
+        for(Iterator<GameBlock> i = GameBlocks.iterator(); i.hasNext();){
+            GameBlock temp = i.next();
+            if(temp.Y == height){
+                i.remove();
+            }
+        }
+        for(int j = height-1; j >= 0; j--){
+            fallGameBlockLine(j);
+        }
     }
     
     public void turnGamePiece(){
@@ -244,31 +257,23 @@ public class Tetris{
         }
     }
     public void turnGamePiece(GamePiece shape,String change_direction){
-    	
-    	if (change_direction.equals("w")) {
-    		if (shape.Turn == 0) shape.Turn = 1;
-    		else if (shape.Turn == 1) shape.Turn = 2;
-    		else if (shape.Turn == 2) shape.Turn = 3;
-    		else if (shape.Turn == 3) shape.Turn = 2;
-  
-    		}
-    	if (change_direction.equals("s")) {
-    		if (shape.Turn == 0) shape.Turn = 3;
-    		else if (shape.Turn == 1) shape.Turn = 0;
-    		else if (shape.Turn == 2) shape.Turn = 1;
-    		else if (shape.Turn == 3) shape.Turn = 0;
-  
-    		}
-
-	if (change_direction.equals("a")) {
-    		shape.XPos--;
-    	}
-    	if(change_direction.equals("d")) {
-    		shape.XPos++;
-    	}
-
-    	
-    	shape.Pos = shape.ALL[shape.type -1][shape.Turn];
+        switch(change_direction){
+            case "w":
+                shape.up();
+                break;
+            case "s":
+                shape.down();
+                break;
+            case "a":
+                shape.XPos--;
+                break;
+            case "d":
+                shape.XPos++;
+                break;
+            default:
+                break;
+        }
+    	shape.Pos = GamePiece.ALL[shape.type -1][shape.Turn];
     }
     	
     public void moveGamePiece(GamePiece shape,String change_direction){ 
@@ -306,7 +311,7 @@ public class Tetris{
             }
             ans += "\n";
         }
-        return ans;
+        return ans + ANSI_RESET;
     }
 
  public void makeBlockAppear() {
@@ -346,7 +351,37 @@ public class Tetris{
     	}
     	return false;
     }
-    
+    public static void printTit () {
+
+String a0="__________                             "+"\n";
+String a1="\\______   \\_______  ______  _  ______  "+"\n";
+String a2=" |    |  _/\\_  __ \\/  _ \\ \\/ \\/ /    \\ "+"\n";
+String a3=" |    |   \\ |  | \\(  <_> )     /   |  \\"+"\n";
+String a4=" |______  / |__|   \\____/ \\/\\_/|___|  /"+"\n";
+String a5="        \\/                          \\/ "+"\n";
+String a6="  __          __         .__           "+"\n";
+String a7="_/  |_  _____/  |________|__| ______   "+"\n";
+String a8="\\   __\\/ __ \\   __\\_  __ \\  |/  ___/   "+"\n";
+String a9=" |  | \\  ___/|  |  |  | \\/  |\\___ \\    "+"\n";
+String b0=" |__|  \\___  >__|  |__|  |__/____  >   "+"\n";
+String b1="           \\/                    \\/    "+"\n";
+System.out.println(ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+b1 + ANSI_RED);
+
+	
+	}
+
+	public void begin () {
+		printTit();
+		System.out.println("Would you like to start a game?" + "\n" + ANSI_GREEN + "if yes press y" + ANSI_RESET);
+		Scanner s = new Scanner(System.in);
+		String userin = "";
+		if (s.hasNext()) {
+			userin = s.next();
+		}
+		if (userin.equals("Y") || userin.equals("y") || userin.equals("Yes") || userin.equals("yes")) {
+		this.createGame();
+}
+	}
     public void createGame() {
     	
     	while (!stuffInTop()) {
@@ -361,13 +396,14 @@ public class Tetris{
             System.out.println(this.printGame());
             //System.out.println(this.stuffInTop());
             try {
-            Thread.sleep(1100);
+            Thread.sleep(2000);
             }
             catch(InterruptedException ex) {
                 thread2.interrupt();
             }
             if (!this.GameObjects.isEmpty()) {          
             this.turnGamePiece(this.GameObjects.get(0),mes);
+         //   System.out.println(mes);
             mes = "";
             }
     		
@@ -380,9 +416,9 @@ public class Tetris{
     public static void main (String [] args){
     	
     
-        Tetris test = new Tetris(20, 20);
+        Tetris test = new Tetris(20,20);
         clear();
-        test.createGame();
+        test.begin();
         
 
 

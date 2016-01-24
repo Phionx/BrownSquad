@@ -29,7 +29,7 @@ public class GridPiece {
         cellType = type;
         color = ANSI_WHITE; 
         if(cellType.equals("Game")){
-            design = "X";
+            design = "O";
             state = false;
         } else if(cellType.equals("Bottom")) {
             design = "=";
