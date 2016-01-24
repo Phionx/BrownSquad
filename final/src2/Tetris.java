@@ -436,7 +436,7 @@ public class Tetris{
     //prints the entire Tetris Game field
     //work on asthetic
     public String printGame(){
-        String ans = "\n\n\n\t\t";
+        String ans = "\n\n\t\tScore: " + score + "\n\t\t";
         for(GridPiece[] i: Game){
             for(GridPiece j: i) {
                 if(j.state){
