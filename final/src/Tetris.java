@@ -118,16 +118,6 @@ public static class TextPanel extends Panel {
         }
     }
     
-    public void fallGameBlock(){
-        
-    }
-    public void fallGameBlocks(){
-        
-    }
-    
-    public void clearLine(){
-        
-    }
     
       public void turnGamePiece(GamePiece shape,String change_direction){
     	
@@ -152,10 +142,6 @@ gamerun = false;
     		}
     	
     	shape.Pos = shape.ALL[shape.type -1][shape.Turn];
-    }
-    
-    public void moveGamePiece(){
-        
     }
     
     
@@ -208,21 +194,6 @@ gamerun = false;
         }
     }
     
-    
-//Checkers------------------------------------------------------------------------------------------------------------------------
-    /*
-    public void checkClearLine(){
-        boolean temp = true;
-        for(int i = 1; i < GridY-1; i++){
-            temp = true;
-            for(int j = 1; j < GridX-1; j++){
-                if(!(Game[i][j].state)) temp = false;
-            }
-            if(temp) 
-        }
-    }*/
-//Printing------------------------------------------------------------------------------------------------------------------------ 
-       
     public void printGame(){
         for (int y = 0; y < Game.length;y++) {
 	for (int x = 0; x < Game[y].length;x++) {
@@ -298,8 +269,6 @@ System.out.println(ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+
 
 		w.setRootPanel(hi);
 
-		// InputChar closeChar = new InputChar('x');
-		// w.setClosingChar(closeChar);
 		w.addListener(new WindowListener() {
 			public void windowChanged(WindowEvent we) {
 				if (we.getType() == WindowEvent.CLOSING) {
@@ -320,19 +289,6 @@ System.out.println(ANSI_YELLOW + a0+a1+a2+a3+a4+a5 + ANSI_BLUE + a6+a7+a8+a9+b0+
     	    delay();
             this.makeBlockAppear();
             this.printGame();
-            //System.out.println(this.stuffInTop());
-            /*
-	    try {
-            Thread.sleep(2000);
-            }
-            catch(InterruptedException ex) {
-                thread2.interrupt();
-            }
-            if (!this.GameObjects.isEmpty()) {          
-            this.turnGamePiece(this.GameObjects.get(0),mes);
-            System.out.println(mes);
-            mes = "";
-*/
             }
     		Toolkit.shutdown();
     		
