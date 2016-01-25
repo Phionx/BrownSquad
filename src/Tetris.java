@@ -270,37 +270,29 @@ public class Tetris{
 	    String down = "" + InputChar.KEY_DOWN;
 	    String right = "" + InputChar.KEY_RIGHT;
 	    String left = "" + InputChar.KEY_LEFT;
-        switch(change_direction){
-            case "w":
+        if(change_direction.equals("w")){
                 turnUp(shape);
-                break;
-            case "s":
+        } else if (change_direction.equals("s")){
                 turnDown(shape);
-                break;
-            case "a":
+        } else if (change_direction.equals("a")){
                 if (shape.XPos > 2) {
                 moveLeft(shape);
                 }
-                break;
-            case "d":
+        } else if (change_direction.equals("d")){
                 if (shape.XPos < GridX - shape.findMax() - 2) {
                 moveRight(shape);
                 }
-                break;
-            case "e":
+        } else if (change_direction.equals("e")){
                 gamerun = false;
-                break;
-	    		
-            default:
-                break;
         }
+
 	    if (change_direction.equals(up)) {
 		turnUp(shape);
 		}
 	    if (change_direction.equals(down)){
 		turnDown(shape);
 		}
-            if (change_direction.equals(left)) {
+        if (change_direction.equals(left)) {
 		if (shape.XPos > 2) {
                 moveLeft(shape);
                 }
