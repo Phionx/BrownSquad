@@ -592,7 +592,7 @@ public class Tetris{
     		Runnable r = new ScanPrint();
         	Thread thread2 = new Thread(r);
             thread2.setDaemon(true);
-            thread2.setPriority(Thread.MAX_PRIORITY);
+            thread2.setPriority(Thread.MIN_PRIORITY);
             thread2.start();
     	    delay();
             this.printGame();
