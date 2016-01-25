@@ -29,7 +29,7 @@ public class Tetris{
 //Instance Variables-----------------------------------------------------------------------------------------------------------------------
 
     //static Tetris game 
-    public static Tetris test = new Tetris(50,50);
+    public static Tetris test = new Tetris(30,30);
     //holds game in jcurses
     public static TextPanel hi = new Tetris.TextPanel();
     public static Window w;
