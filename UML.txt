@@ -1,9 +1,183 @@
-Tetris
-    Block
-        Easy
-        Med
-        Hard
-    NoBlock
+-public class Tetris
 
-GridPiece
-Input
+	 CLASSES:
+	-public static class TextPanel extends Panel // this is for the jcurses functionality
+
+	
+	INSTANCE VARS:
+	-Tetris test
+	-TextPanel hi
+	-Window w
+	-int time
+	-boolean gamerun
+	-int GridX,GridY
+	-int score
+	-ArrayList<GamePiece> GameObjects
+	-GridPiece[][] Game
+	-GridPiece[][] GameReset
+
+	CONSTRUCTORS
+	-public Tetris(int SizeX, int SizeY)
+
+	METHODS
+    	-public void init()
+    	-public void update()
+    	-public void fallGamePiece(GamePiece temp)
+    	-public void fallGamePieces()
+	-public void fallGameBlockLine(int height)
+	-public void clearLine(int height)
+        -public void turnGamePiece(GamePiece shape, String change_direction);
+	-public void turnUp(GamePiece shape)
+	-public void turnDown(GamePiece shape)
+	-public void moveRight(GamePiece shape)
+	-public boolean canMoveRight(GamePiece shape)
+	-public boolean canMoveLeft(GamePiece shape)
+	-public void moveLeft(GamePiece shape)
+	-public void GamePieceToGameBlock(GamePiece temp)
+	-public void newPiece()
+	-public void addGamePieces()
+	-public void addGamePieceToGame(GamePiece temp)
+	-public void addGameBlocks()
+	-public void printGame()
+	-public void checkClearLine()
+	-public boolean stuffInTop()
+	-public void reset()
+	-private static void clear()
+	-private static void delay()
+	-public static void startGame()
+	-public void runGame()
+	-public void printEnd()
+	-public static void main (String [] args)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-public class GameBlock extends GridPiece
+	INSTANCE VARIABLES
+	 -public int x,y
+	CONSTRUCTORS
+	-public GameBlock(String block, int xpos, int ypos)
+	METHODS
+	-public void fall()
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+public class GamePiece
+-INSTANCE VARIABLES
+    -public int XPos
+    -public int YPos
+    -public int XMax
+    -public int type
+    -public int Turn
+    -public String Block
+    -public int Size
+    -public boolean [][] Pos
+    //Block Positions
+    -public static final boolean [][][][] ALL
+    //T
+    -public static final boolean [][][] T
+    -public static final boolean [][] T_1
+    -public static final boolean [][] T_2
+    -public static final boolean [][] T_3
+    -public static final boolean [][] T_4
+    //S
+    -public static final boolean [][][] S
+    -public static final boolean [][] S_1
+    -public static final boolean [][] S_2
+    -public static final boolean [][] S_3
+    -public static final boolean [][] S_4
+    //Z
+    -public static final boolean [][][] Z
+    -public static final boolean [][] Z_1
+    -public static final boolean [][] Z_2
+    -public static final boolean [][] Z_3
+    -public static final boolean [][] Z_4
+    //J
+    -public static final boolean [][][] J
+    -public static final boolean [][] J_1
+    -public static final boolean [][] J_2
+    -public static final boolean [][] J_3
+    -public static final boolean [][] J_4
+    //L
+    -public static final boolean [][][] L
+    -public static final boolean [][] L_1
+    -public static final boolean [][] L_2
+    -public static final boolean [][] L_3
+    -public static final boolean [][] L_4
+    //O
+    -public static final boolean [][][] O
+    -public static final boolean [][] O_1
+    -public static final boolean [][] O_2
+    -public static final boolean [][] O_3
+    -public static final boolean [][] O_4
+    //I
+    -public static final boolean [][][] I
+    -public static final boolean [][] I_1
+    -public static final boolean [][] I_2
+    -public static final boolean [][] I_3
+    -public static final boolean [][] I_4
+
+    -CONSTRUCTORS
+    -public GamePiece(GamePiece temp)
+    
+    -public GamePiece(int X, int Y, String BlockType, int TurnPos)
+    
+    -METHODS
+    -public void findMax()
+
+    -public void init_Pieces()
+    -public void up()
+    -public void down()
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+public class GridPiece 
+    -INSTANCE VARIABLES	
+    -public CharColor color // color of piece
+    -public String cellType //type of cell
+    -public String design
+    -public boolean state
+    -public String name
+    -CharColor greenOnBlack
+    -CharColor yellowOnBlack
+    -CharColor redOnBlack
+    -CharColor whiteOnBlack
+    -CharColor blueOnBlack
+    -CharColor magentaOnBlack
+    -CharColor cyanOnBlack
+    
+    -METHODS
+    -public GridPiece(String type, String block)
+    public GridPiece(String type)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+public class PlayTetris 
+    -METHODS
+    -public static void printTitle()
+    -public static boolean begin ()
+    -public static void main (String [] args)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+public class ScanPrint implements Runnable{
+	-METHODS
+	-public void run()
+
+
+	
+
+
+
+
+	
+
+
+
+
+
+
+	
+
+
+
+	
+
+	
+
+	
