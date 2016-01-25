@@ -39,4 +39,13 @@
     * Added boundaries so that the falling blocks know when to stop falling
 1.17.2015 | Shantanu | Update Turns 
     * I updated the GamePiece with turn and move methods
-
+1.25-26.2016 | Shantanu | Bash Script && adapting code
+    * I implemented new code into Sachal's awesome input code
+    * Wrote a bash script to run the game both in 32-bit and 64-bit OS
+    * Updated README
+    * Updated conditions --- so many conditions ugh
+    * fixed minor bugs
+    * been working on cloud9 because still can't fink the jcurses lib for it to work
+      on mac ... but it works on Linux and Windows 
+    * pulling an all-nighter with sachal
+    
