@@ -266,6 +266,10 @@ public class Tetris{
     
     //changes the Postion or orientation of game piece according to user input
     public void turnGamePiece(GamePiece shape,String change_direction){
+    String up = "" + InputChar.KEY_UP;	
+	    String down = "" + InputChar.KEY_DOWN;
+	    String right = "" + InputChar.KEY_RIGHT;
+	    String left = "" + InputChar.KEY_LEFT;
         switch(change_direction){
             case "w":
                 turnUp(shape);
@@ -279,17 +283,33 @@ public class Tetris{
                 }
                 break;
             case "d":
-                if (shape.XPos < GridX - shape.findMax() - 1) {
+                if (shape.XPos < GridX - shape.findMax() - 2) {
                 moveRight(shape);
                 }
                 break;
             case "e":
                 gamerun = false;
                 break;
+	    		
             default:
                 break;
         }
-        mes = "";
+	    if (change_direction.equals(up)) {
+		turnUp(shape);
+		}
+	    if (change_direction.equals(down)){
+		turnDown(shape);
+		}
+            if (change_direction.equals(left)) {
+		if (shape.XPos > 2) {
+                moveLeft(shape);
+                }
+		}
+	    if (change_direction.equals(right)) {
+		if (shape.XPos < GridX - shape.findMax() - 2) {
+                moveRight(shape);
+                }
+                }
     }
 
     //Turn piece clockwise
