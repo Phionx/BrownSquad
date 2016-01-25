@@ -7,7 +7,7 @@ public class GamePiece{
     public String Block;
     public int Size;
     public boolean [][] Pos;
-
+    public int yOfX;
     //Block Positions
     public static final boolean [][][][] ALL = new boolean [7][][][]; //holds all possible states of pieces
     //T
@@ -100,16 +100,20 @@ public class GamePiece{
        Size = Pos.length;
     }
     
-    public void findMax(){
-        int temp = 0;
-        int temp2 = 0;
+    public int findMax(){
+        int max = 0;
+        
         for(int i = 0; i < Size; i++){
             for(int j = 0; j < Size; j++){
-                if(Pos[i][j]) temp2 = j;
+                if(Pos[i][j] && j > max) {
+                    max = j;
+                    yOfX = i;
+                }
             }
-            if(temp2 > temp) temp = temp2;
+           // if(temp2 > temp) temp = temp2;
         }
-        XMax = temp + 1;
+        XMax = max + 1;
+        return XMax; 
     }
 
     public void init_Pieces(){

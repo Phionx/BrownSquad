@@ -279,7 +279,7 @@ public class Tetris{
                 }
                 break;
             case "d":
-                if (shape.XPos < (GridX - 2 - shape.XMax)) {
+                if (shape.XPos < GridX - shape.findMax() - 1) {
                 moveRight(shape);
                 }
                 break;
@@ -411,6 +411,12 @@ public class Tetris{
     
     
     
+    public boolean canMove(GamePiece temp) {
+         if (Game[temp.YPos+temp.yOfX][temp.XPos+temp.XMax].state) {
+                  return false;
+         }
+         return true;
+    }
 //Transition------------------------------------------------------------------------------------------------------------------------
     //turns the blocks that make up a falling GamePiece into GameBlocks when it hits a stationary block
     public void GamePieceToGameBlock(GamePiece temp){
@@ -479,7 +485,7 @@ public class Tetris{
                 }
             }
         }
-        hi.printToScreen("Your score is: " + score, Game.length + 5, Game.length/2, Game[0][0].magentaOnBlack);
+        hi.printToScreen("Your score is: " + GameObjects.get(0).findMax(), Game.length + 5, Game.length/2, Game[0][0].magentaOnBlack);
     }
 
 //Checkers------------------------------------------------------------------------------------------------------------------------
