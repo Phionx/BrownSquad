@@ -7,15 +7,20 @@ APCS1 Final Project
 #Running the Game
 If you wish to run the please first go into the src/ directory, then use the automaticed bash script:
 
-'''
+```
 ./Tetris.sh
-'''
+```
 
 If you have a 64-bit OS or you are experiencing some errors please run this bash script instead:
 
-'''
+```
 ./Tetris64.sh
-'''
+```
+
+#Controls
+
+You can use both W,A,S,D and the Arrow Keys!
+
 
 #Authors
 [Shantanu Jha](https://github.com/Phionx/) && [Sachal Malick](https://github.com/sachalmalick)
