@@ -8,13 +8,13 @@ APCS1 Final Project
 If you wish to run the please first go into the src/ directory, then use the automaticed bash script:
 
 ```
-./Tetris.sh
+./Tetris.sh.x
 ```
 
 If you have a 64-bit OS or you are experiencing some errors please run this bash script instead:
 
 ```
-./Tetris64.sh
+./Tetris64.sh.x
 ```
 
 #Controls
